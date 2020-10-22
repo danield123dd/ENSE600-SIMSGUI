@@ -152,6 +152,21 @@ public class SearchStudentController
             searchResultsModel.addRow(new String[] {String.valueOf(stu.getStudentID()), stu.getFirstName(), stu.getLastName(), String.valueOf(stu.getDateOfBirth())});    
         }
     }
+    
+    /**
+     * Toggles the View Fields between Student ID and Name
+     */
+    private void toggleViewFields()
+    {
+        boolean searchByID = searchStudentWindow.searchByIDRadio.isSelected();
+        searchStudentWindow.studentIDField.setEnabled(searchByID);
+        searchStudentWindow.searchByIDButton.setEnabled(searchByID);
+        searchStudentWindow.firstNameField.setEnabled(!searchByID);
+        searchStudentWindow.lastNameField.setEnabled(!searchByID);
+        searchStudentWindow.searchByNameButton.setEnabled(!searchByID);
+        searchStudentWindow.selectStudentButton.setEnabled(!searchByID);
+        searchStudentWindow.studentSearchResultsTable.setEnabled(!searchByID);
+    }
 
     /**
      * Action Listener Class used for Student Search Windows
@@ -183,6 +198,10 @@ public class SearchStudentController
                     searchStudentByID(studentID);
                 }
             }
+            
+            // If either of the Radio controls are toggled, update the view to reflect the selected option.
+            else if (e.getSource().equals(searchStudentWindow.searchByIDRadio) || e.getSource().equals(searchStudentWindow.searchByNameRadio))
+                toggleViewFields();
         }
     
     }

@@ -1,19 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * SearchStudentWindow Class
+ * A View which shows an editable panel with information about a Student.
+ * Project 2: SIMS GUI Project
+ * @author Daniel Dymond (Group 1 - ID# 17977610) 2020
  */
 package Views;
 
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author danie
- */
-public class SearchStudentWindow extends javax.swing.JInternalFrame {
-    
+public class SearchStudentWindow extends javax.swing.JInternalFrame 
+{
     ActionListener actionListener;
     DefaultTableModel tableModel;
     
@@ -39,7 +36,9 @@ public class SearchStudentWindow extends javax.swing.JInternalFrame {
         jSeparator1 = new javax.swing.JSeparator();
         heroLabel = new javax.swing.JLabel();
         searchByIDRadio = new javax.swing.JRadioButton();
+        searchByIDRadio.addActionListener(actionListener);
         searchByNameRadio = new javax.swing.JRadioButton();
+        searchByNameRadio.addActionListener(actionListener);
         studentIDField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -67,19 +66,9 @@ public class SearchStudentWindow extends javax.swing.JInternalFrame {
         searchRadioGroup.add(searchByIDRadio);
         searchByIDRadio.setSelected(true);
         searchByIDRadio.setText("Search by Student ID");
-        searchByIDRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchByIDRadioActionPerformed(evt);
-            }
-        });
 
         searchRadioGroup.add(searchByNameRadio);
         searchByNameRadio.setText("Search by Student Name");
-        searchByNameRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchByNameRadioActionPerformed(evt);
-            }
-        });
 
         studentIDField.setToolTipText("");
 
@@ -194,32 +183,6 @@ public class SearchStudentWindow extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void searchByIDRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByIDRadioActionPerformed
-        if (searchByIDRadio.isSelected())
-        {
-            studentIDField.setEnabled(true);
-            searchByIDButton.setEnabled(true);
-            firstNameField.setEnabled(false);
-            lastNameField.setEnabled(false);
-            searchByNameButton.setEnabled(false);
-            selectStudentButton.setEnabled(false);
-            studentSearchResultsTable.setEnabled(true);
-        }   
-    }//GEN-LAST:event_searchByIDRadioActionPerformed
-
-    private void searchByNameRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByNameRadioActionPerformed
-        if (searchByNameRadio.isSelected())
-        {
-            studentIDField.setEnabled(false);
-            searchByIDButton.setEnabled(false);
-            firstNameField.setEnabled(true);
-            lastNameField.setEnabled(true);
-            searchByNameButton.setEnabled(true);
-            selectStudentButton.setEnabled(true);
-            studentSearchResultsTable.setEnabled(false);
-        }   
-    }//GEN-LAST:event_searchByNameRadioActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTextField firstNameField;
@@ -232,9 +195,9 @@ public class SearchStudentWindow extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator jSeparator2;
     public javax.swing.JTextField lastNameField;
     public javax.swing.JButton searchByIDButton;
-    private javax.swing.JRadioButton searchByIDRadio;
+    public javax.swing.JRadioButton searchByIDRadio;
     public javax.swing.JButton searchByNameButton;
-    private javax.swing.JRadioButton searchByNameRadio;
+    public javax.swing.JRadioButton searchByNameRadio;
     private javax.swing.ButtonGroup searchRadioGroup;
     public javax.swing.JButton selectStudentButton;
     public javax.swing.JTextField studentIDField;
