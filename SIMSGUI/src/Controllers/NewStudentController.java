@@ -75,16 +75,23 @@ public class NewStudentController {
     }
     
     /**
-     * Updates the information of the Student Object from the Window
-     * @return      True if the operation is successful
+     * Uses information from the view to create a new Student Object
+     * @return True if the Student can be created
      * @throws IllegalArgumentException If the Student object refuses the details entered
      */
     private boolean createStudentModel() throws IllegalArgumentException
     {
-        // Update the Student Object with Details from exisitng fields
+        // Extrapolate the details from the View
         StudentDetailPanel sDP = newStudentWindow.studentDetailsPanel;
         String firstName = sDP.firstNameField.getText();
         String lastName = sDP.lastNameField.getText();
+        Gender gender = Gender.valueOf(sDP.genderComboField.getSelectedItem().toString().toUpperCase());
+        Address address = new Address(sDP.streetAddressField.getText(), sDP.suburbAddressField.getText(), 
+                sDP.cityAddressField.getText(), sDP.countryAddressField.getText(), sDP.zipAddressField.getText());
+        String email = sDP.emailAddressField.getText();
+        String phone = sDP.phoneNumberField.getText();
+        
+        // Attempt to parse a dateOfBirth - Show an error if this is not possible
         LocalDate dateOfBirth;
         try {
             dateOfBirth = LocalDate.parse(sDP.dateOfBirthField.getText());
@@ -92,20 +99,11 @@ public class NewStudentController {
             throw new IllegalArgumentException("The Date of Birth entered is not valid. Please enter the date of birth in YYYY-MM-DD format.");
         }
         
-        Gender gender = Gender.valueOf(sDP.genderComboField.getSelectedItem().toString().toUpperCase());
-        Address address = new Address(sDP.streetAddressField.getText(), sDP.suburbAddressField.getText(), 
-                sDP.cityAddressField.getText(), sDP.countryAddressField.getText(), sDP.zipAddressField.getText());
-        String email = sDP.emailAddressField.getText();
-        String phone = sDP.phoneNumberField.getText();
-        
-        // Now, update the Student Object
-        // If there are any issues, the exception is thrown to the calling method
-        
+        // Generate a new Student ID from the Database
         String studentID = dBA.generateNewStudentID();
-        // TODO
         
-        student = new Student(firstName, lastName, studentID, dateOfBirth, gender, address, email, phone);
-        
+        // Create a new Student - This will either throw an exception, or this method will return true
+        student = new Student(firstName, lastName, studentID, dateOfBirth, gender, address, email, phone);  
         return true;
     }
     
