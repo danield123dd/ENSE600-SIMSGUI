@@ -171,8 +171,12 @@ public class SessionWindow extends javax.swing.JFrame {
 
     private void searchStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchStudentButtonActionPerformed
         // TODO add your handling code here:
-        //desktop.add(new SearchStudentWindow()).setVisible(true);
-        new StudentManagementSession(dBA, this, false);
+        SessionWindow sW = this;
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new StudentManagementSession(dBA, sW, false);
+            }
+        });
     }//GEN-LAST:event_searchStudentButtonActionPerformed
 
     /**
@@ -190,7 +194,12 @@ public class SessionWindow extends javax.swing.JFrame {
 
     private void createStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createStudentButtonActionPerformed
         // TODO add your handling code here:
-        new StudentManagementSession(dBA, this, true);
+        SessionWindow sW = this;
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new StudentManagementSession(dBA, sW, true);
+            }
+        });
     }//GEN-LAST:event_createStudentButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

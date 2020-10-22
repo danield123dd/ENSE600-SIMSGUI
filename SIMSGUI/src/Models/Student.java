@@ -1,17 +1,16 @@
-package Models;
-
 /**
  * Student Class
  * Object which stores the Personal and Academic information about a Student in the Institution
  * Project 2: SIMS GUI Project
  * @author Daniel Dymond (Group 1 - ID# 17977610) 2020
  */
+package Models;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class Student {
-
+public class Student 
+{
     private String firstName;
     private String lastName;
     private String studentID;
@@ -22,7 +21,7 @@ public class Student {
     private String phoneNumber;
 
     /**
-     * Initialise a Student Object using the validation techniques from the called methods
+     * Initialise a Student Object, validating the input as the object is created
      * @param firstName     First Name
      * @param lastName      Last Name
      * @param studentID     Student ID
@@ -59,7 +58,8 @@ public class Student {
      * @param firstName First Name
      * @throws IllegalArgumentException  Thrown if the first name is empty, or contains illegal characters
      */
-    public void setFirstName(String firstName) throws IllegalArgumentException {
+    public void setFirstName(String firstName) throws IllegalArgumentException 
+    {
         if (firstName == null || !firstName.replaceAll("[^a-zA-Z -]", "").equals(firstName) || firstName.trim().equals("")) {
             throw new IllegalArgumentException("You must enter a valid first name, consisting only of alphabetical and spaces.");
         }
@@ -245,6 +245,7 @@ public class Student {
         long years = ChronoUnit.YEARS.between(this.dateOfBirth, now);
         return String.valueOf(years);
     }
+    
     /**
      * Generates a Summarised view of a Student's Information.
      * @return  Summarised String
