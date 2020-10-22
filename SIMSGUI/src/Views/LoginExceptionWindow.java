@@ -19,6 +19,8 @@ public class LoginExceptionWindow extends javax.swing.JFrame {
     public LoginExceptionWindow(String message) {
         this.message = message;
         initComponents();
+        getRootPane().setDefaultButton(acknowledgementButton);
+        messageArea.setLineWrap(true);
     }
 
     /**
@@ -33,10 +35,14 @@ public class LoginExceptionWindow extends javax.swing.JFrame {
         acknowledgementButton = new javax.swing.JButton();
         icon = new javax.swing.JLabel();
         errorHeader = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        messageArea = new javax.swing.JTextPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        messageArea = new javax.swing.JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Error");
+        setAlwaysOnTop(true);
+        setIconImages(null);
+        setResizable(false);
 
         acknowledgementButton.setText("OK");
         acknowledgementButton.addActionListener(new java.awt.event.ActionListener() {
@@ -50,10 +56,12 @@ public class LoginExceptionWindow extends javax.swing.JFrame {
 
         errorHeader.setText("An error occured while completing that action:");
 
-        messageArea.setEditable(false);
-        messageArea.setMaximumSize(new java.awt.Dimension(6, 20));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(166, 96));
+
+        messageArea.setColumns(20);
+        messageArea.setRows(5);
         messageArea.setText(message);
-        jScrollPane2.setViewportView(messageArea);
+        jScrollPane1.setViewportView(messageArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -66,9 +74,9 @@ public class LoginExceptionWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(errorHeader)
-                        .addGap(0, 131, Short.MAX_VALUE))
+                        .addGap(0, 71, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -84,13 +92,14 @@ public class LoginExceptionWindow extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(errorHeader)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(acknowledgementButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void acknowledgementButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acknowledgementButtonActionPerformed
@@ -102,7 +111,7 @@ public class LoginExceptionWindow extends javax.swing.JFrame {
     private javax.swing.JButton acknowledgementButton;
     private javax.swing.JLabel errorHeader;
     private javax.swing.JLabel icon;
-    private javax.swing.JScrollPane jScrollPane2;
-    public javax.swing.JTextPane messageArea;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea messageArea;
     // End of variables declaration//GEN-END:variables
 }
