@@ -1,15 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * AboutWindow Class
+ * A Window which shows information about the program and legal information.
+ * Project 2: SIMS GUI Project
+ * @author Daniel Dymond (Group 1 - ID# 17977610) 2020
  */
 package Views;
 
-/**
- *
- * @author danie
- */
-public class AboutWindow extends javax.swing.JInternalFrame {
+public class AboutWindow extends javax.swing.JInternalFrame 
+{
 
     /**
      * Creates new form AboutWindow
@@ -87,7 +85,6 @@ public class AboutWindow extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel gnuLicenseHeader;
