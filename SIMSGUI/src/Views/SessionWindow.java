@@ -6,6 +6,7 @@
 package Views;
 
 import Controllers.DatabaseAgent;
+import Controllers.LoginController;
 import Controllers.StudentManagementSession;
 import java.sql.SQLException;
 import javax.swing.JDesktopPane;
@@ -157,7 +158,7 @@ public class SessionWindow extends javax.swing.JFrame {
             // If the logout is successful, return to login window
             if (logout) 
             {
-                new LoginWindow(dBA).setVisible(true);
+                new LoginController();
                 this.dispose();
             } 
             else

@@ -1,5 +1,7 @@
 package Views;
 
+import Controllers.LoginController;
+
 /**
  * SIMS GUI
  * @author danie
@@ -41,7 +43,8 @@ public class SIMSGUI {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Views.LoginWindow(dBA).setVisible(true);
+                new LoginController();
+                //new Views.LoginWindow(dBA).setVisible(true);
             }
         });
     }

@@ -5,6 +5,8 @@
  */
 package Controllers;
 
+import Views.ExceptionWindow;
+import Views.LoginExceptionWindow;
 import Views.LoginWindow;
 import Views.SessionWindow;
 import java.awt.event.ActionEvent;
@@ -19,6 +21,28 @@ public class LoginController {
     
     DatabaseAgent dBA;
     LoginWindow loginWindow;
+    LoginWindowActionListener loginWindowActionListener;
+    
+    public LoginController()
+    {
+        spawnWindow();
+    }
+    
+    
+    /**
+     * Generates and Displays the SearchStudentWindow
+     */
+    private void spawnWindow() 
+    {
+        // Create a new Action Listener
+        loginWindowActionListener = new LoginWindowActionListener();
+           
+        // Create the Search Student Window
+        this.loginWindow = new LoginWindow(loginWindowActionListener);
+
+        // Add the window to the screen and set visible
+        loginWindow.setVisible(true);
+    }
     
     public class LoginWindowActionListener implements ActionListener {
 
@@ -30,15 +54,16 @@ public class LoginController {
             {
                 // Attempt to connect to the database with the details provided
             try {
-                dBA = new Controllers.DatabaseAgent(usernameField.getText(), new String(passwordField.getPassword()), databaseURLField.getText());
+                dBA = new Controllers.DatabaseAgent(loginWindow.usernameField.getText(), new String(loginWindow.passwordField.getPassword()), loginWindow.databaseURLField.getText());
                 new SessionWindow(dBA).setVisible(true);
-                this.dispose();
+                loginWindow.dispose();
             } catch (SQLException sqle) {
-                errorMessage.setText(sqle.getMessage());
-                exceptionDialog.setVisible(true);
+                new LoginExceptionWindow(sqle.getMessage()).setVisible(true);
+                //exceptionDialog.setVisible(true);
             } catch (IllegalArgumentException iie) {
-                errorMessage.setText(iie.getMessage());
-                exceptionDialog.setVisible(true);
+                new LoginExceptionWindow(iie.getMessage()).setVisible(true);
+                //errorMessage.setText(iie.getMessage());
+                //exceptionDialog.setVisible(true);
             }
             }
         }

@@ -1,6 +1,7 @@
 package Views;
 
 import Controllers.DatabaseAgent;
+import Controllers.LoginController.LoginWindowActionListener;
 import java.sql.SQLException;
 
 /**
@@ -9,14 +10,14 @@ import java.sql.SQLException;
  */
 public class LoginWindow extends javax.swing.JFrame {
     
-    DatabaseAgent dBA;
+    LoginWindowActionListener actionListener;
 
     /**
      * Creates new form LoginWindow
      * @param session
      */
-    public LoginWindow(DatabaseAgent dBA) {
-        this.dBA = dBA;
+    public LoginWindow(LoginWindowActionListener actionListener) {
+        this.actionListener = actionListener;
         initComponents();
         getRootPane().setDefaultButton(loginButton);
     }
@@ -44,6 +45,7 @@ public class LoginWindow extends javax.swing.JFrame {
         usernameField = new javax.swing.JTextField();
         passwordField = new javax.swing.JPasswordField();
         loginButton = new javax.swing.JButton();
+        loginButton.addActionListener(actionListener);
         closeButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         databaseURLField = new javax.swing.JTextField();
@@ -160,11 +162,6 @@ public class LoginWindow extends javax.swing.JFrame {
         passwordLabel.setText("Password:");
 
         loginButton.setText("Login");
-        loginButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginButtonActionPerformed(evt);
-            }
-        });
 
         closeButton.setText("Close");
         closeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -244,22 +241,6 @@ public class LoginWindow extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_closeButtonActionPerformed
 
-    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        
-        // Attempt to connect to the database with the details provided
-        try {
-            dBA = new Controllers.DatabaseAgent(usernameField.getText(), new String(passwordField.getPassword()), databaseURLField.getText());
-            new SessionWindow(dBA).setVisible(true);
-            this.dispose();
-        } catch (SQLException sqle) {
-            errorMessage.setText(sqle.getMessage());
-            exceptionDialog.setVisible(true);
-        } catch (IllegalArgumentException iie) {
-            errorMessage.setText(iie.getMessage());
-            exceptionDialog.setVisible(true);
-        }
-    }//GEN-LAST:event_loginButtonActionPerformed
-
     private void defaultDatabaseCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_defaultDatabaseCheckBoxActionPerformed
         if (defaultDatabaseCheckBox.isSelected())
             databaseURLField.setEnabled(false);
@@ -275,8 +256,8 @@ public class LoginWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton acknowledgementButton;
     public javax.swing.JButton closeButton;
-    private javax.swing.JTextField databaseURLField;
-    private javax.swing.JCheckBox defaultDatabaseCheckBox;
+    public javax.swing.JTextField databaseURLField;
+    public javax.swing.JCheckBox defaultDatabaseCheckBox;
     private javax.swing.JLabel errorHeader;
     private javax.swing.JTextArea errorMessage;
     private javax.swing.JDialog exceptionDialog;
@@ -287,9 +268,9 @@ public class LoginWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JButton loginButton;
-    private javax.swing.JPasswordField passwordField;
+    public javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordLabel;
-    private javax.swing.JTextField usernameField;
+    public javax.swing.JTextField usernameField;
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
 }
