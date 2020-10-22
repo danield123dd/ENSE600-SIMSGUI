@@ -1,15 +1,18 @@
+/**
+ * StudentManagementSession Class
+ * A Session Controller which facilitates user interactions with Students in the Database
+ * and encapsulates references and work into one class for multi-threading.
+ * Project 2: SIMS GUI Project
+ * @author Daniel Dymond (Group 1 - ID# 17977610) 2020
+ */
 package Controllers;
 
 import Models.Student;
 import Views.SessionWindow;
 
-/**
- *
- * @author danie
- */
-public class StudentManagementSession {
-    
-    // References to the Session Window to create elements on
+public class StudentManagementSession 
+{
+    // References to the Session Window and DatabaseAgent for Controllers
     static SessionWindow sessionWindow;
     static DatabaseAgent databaseAgent;
     
@@ -18,10 +21,15 @@ public class StudentManagementSession {
     SearchStudentController searchStudentController;
     NewStudentController newStudentController;
     
-    // Refernece to Models used
+    // Refernece to Model used
     Student student;
    
-    
+    /**
+     * Creates a new StudentManagement Session, and spawns the corresponding window based on intended outcome.
+     * @param databaseAgent DatabaseAgent containing the Database session to interact with
+     * @param sessionWindow SessionWindow containing the Desktop environment to display windows on
+     * @param newStudent Set true if creating a New Student, or false to edit an Existing Student
+     */
     public StudentManagementSession(DatabaseAgent databaseAgent, SessionWindow sessionWindow, boolean newStudent)
     {
         // Set References
