@@ -1,22 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Views;
 
 import java.awt.event.ActionListener;
 
 /**
- *
- * @author danie
+ * NewStudentWindow Class
+ * A Window which acts as the front-end for the user to the Controller object
+ * Project 2: SIMS GUI Project
+ * @author Daniel Dymond (Group 1 - ID# 17977610) 2020
  */
-public class NewStudentWindow extends javax.swing.JInternalFrame {
-    
+public class NewStudentWindow extends javax.swing.JInternalFrame
+{
     ActionListener actionListener;
 
     /**
-     * Creates new form StudentDetailsWindow
+     * Creates new StudentDetailsWindow
      */
     public NewStudentWindow(ActionListener actionListener) {
         this.actionListener = actionListener;
@@ -93,7 +90,6 @@ public class NewStudentWindow extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton cancelButton;
