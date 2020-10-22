@@ -1,7 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * NewStudentController Class
+ * A Controller which facilitates user interactions with the NewStudentWindow and Database
+ * Project 2: SIMS GUI Project
+ * @author Daniel Dymond (Group 1 - ID# 17977610) 2020
  */
 package Controllers;
 
@@ -16,31 +17,36 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-/**
- *
- * @author danie
- */
 public class NewStudentController {
     
-    StudentManagementSession sMS;
-    SessionWindow sW;
-    NewStudentWindow newStudentWindow;
-    NewStudentActionListener newStudentActionListener;
-    DatabaseAgent dBA;
-    Student student;
+    private final StudentManagementSession sMS;
+    private final SessionWindow sW;
+    private NewStudentWindow newStudentWindow;
+    private NewStudentActionListener newStudentActionListener;
+    private static DatabaseAgent dBA;
+    private Student student;
     
+    /**
+     * Create a NewStudentController and spawn a Window on the Desktop
+     * @param sMS StudentManagementSession which contains the Student Object
+     * @param sW SessionWindow which contains the Desktop Environment
+     */
     public NewStudentController (StudentManagementSession sMS, SessionWindow sW)
     {
+        // Set Class Variables
         this.sW = sW;
         this.sMS = sMS;
         this.dBA = sMS.dBA;
         this.student = sMS.student;
+        
+        // Create Window
         spawnWindow();
     }
     
+    /**
+     * Create and display a NewStudentWindow on the Desktop
+     */
     private void spawnWindow()
     {
         // Create the Action Listener
@@ -49,42 +55,23 @@ public class NewStudentController {
         // Create the Student Creation Window
         newStudentWindow = new NewStudentWindow(newStudentActionListener);
         
-        // Populate
-        newStudentWindow.studentDetailsPanel.studentIDField.setText("Will Be Populated on Entry");
+        // Set the Student ID Field to a Filler Value
+        newStudentWindow.studentDetailsPanel.studentIDField.setText("##########");
         
         // Finally, add the window to the desktop manager and set visible
         sW.getDesktop().add(newStudentWindow);
         newStudentWindow.setVisible(true);
     }
     
-    
+    /**
+     * Removes the NewStudentWindow from the Desktop and disposes it
+     */
     private void destroyWindow()
     {
         this.newStudentWindow.setVisible(false);
         sW.getDesktop().remove(this.newStudentWindow);
         this.newStudentWindow.dispose();
         this.newStudentWindow = null;
-    }
-    
-    /**
-     * Updates the Window with the current details from the Model
-     */
-    private void updateWindowDetails()
-    {
-        // Populate the Fields for the Student Detail Panel
-        StudentDetailPanel sDP = newStudentWindow.studentDetailsPanel;
-        sDP.firstNameField.setText(student.getFirstName());
-        sDP.lastNameField.setText(student.getLastName());
-        sDP.dateOfBirthField.setText(student.getDateOfBirth().toString());
-        sDP.emailAddressField.setText(student.getEmail());
-        sDP.phoneNumberField.setText(student.getPhoneNumber());
-        sDP.genderComboField.setSelectedItem(student.getGender().toString());
-        sDP.streetAddressField.setText(student.getAddress().getStreetAddress());
-        sDP.suburbAddressField.setText(student.getAddress().getSuburb());
-        sDP.cityAddressField.setText(student.getAddress().getTownCity());
-        sDP.countryAddressField.setText(student.getAddress().getCountry());
-        sDP.zipAddressField.setText(student.getAddress().getZip());
-        sDP.studentIDField.setText(student.getStudentID());
     }
     
     /**
@@ -124,7 +111,7 @@ public class NewStudentController {
     
     /**
      * Requests the Database to push changes to the student object
-     * @return 
+     * @return True if the Database Operation completes successfully, otherwise false with exceptionDialog showing.
      */
     private boolean updateDatabase()
     {
@@ -144,31 +131,36 @@ public class NewStudentController {
             return false;
         }
         
-        // If successful, return true
-        sW.showInformationMessage("The Student " + student.getFullName() + " has been updated.");
+        // If successful, show Information Message and return true
+        sW.showInformationMessage("The Student " + student.getFullName() + " has been created with Student ID: " + student.getStudentID() + ".");
         return true;
     }
     
+    /**
+     * Performs the Update and Close Operation of the NewStudentWindow
+     */
     private void updateAndClose()
     {
+        // If the Database is updated with the new student, destroy this window
         if (updateDatabase())
             destroyWindow(); 
     }
     
-    public class NewStudentActionListener implements ActionListener {
+    /**
+     * ActionListener used to listen to events from a NewStudentWindow
+     */
+    public class NewStudentActionListener implements ActionListener 
+    {
+        @Override
+        public void actionPerformed(ActionEvent e) 
+        {
+            // If the Update and Close Button is pressed, perform an Update and Close operation
+            if (e.getSource().equals(newStudentWindow.enrollStudentButton))
+                updateAndClose();
 
-     @Override
-     public void actionPerformed(ActionEvent e) 
-     {
-         // If the Enroll Student Button is pressed, validate the input and display appropriate dialog box
-         if (e.getSource().equals(newStudentWindow.enrollStudentButton))
-         {
-             // Try obtain the text from each field
-             updateAndClose();
-
-         }
-     }
-        
+            // Otherwise, if the Close Button is pressed, close the window
+            else if (e.getSource().equals(newStudentWindow.cancelButton))
+                destroyWindow();
+        } 
     }
-    
 }
