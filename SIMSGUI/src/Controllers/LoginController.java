@@ -22,6 +22,7 @@ public class LoginController {
     DatabaseAgent dBA;
     LoginWindow loginWindow;
     LoginWindowActionListener loginWindowActionListener;
+    static String DEFAULT_DATABASE_URL = "jdbc:derby://localhost:1527/SIMSDB";
     
     public LoginController()
     {
@@ -53,18 +54,30 @@ public class LoginController {
             if (e.getSource().equals(loginWindow.loginButton))
             {
                 // Attempt to connect to the database with the details provided
-            try {
-                dBA = new Controllers.DatabaseAgent(loginWindow.usernameField.getText(), new String(loginWindow.passwordField.getPassword()), loginWindow.databaseURLField.getText());
-                new SessionWindow(dBA).setVisible(true);
-                loginWindow.dispose();
-            } catch (SQLException sqle) {
-                new LoginExceptionWindow(sqle.getMessage()).setVisible(true);
-                //exceptionDialog.setVisible(true);
-            } catch (IllegalArgumentException iie) {
-                new LoginExceptionWindow(iie.getMessage()).setVisible(true);
-                //errorMessage.setText(iie.getMessage());
-                //exceptionDialog.setVisible(true);
+                try {
+                    dBA = new Controllers.DatabaseAgent(loginWindow.usernameField.getText(), new String(loginWindow.passwordField.getPassword()), loginWindow.databaseURLField.getText());
+                    new SessionWindow(dBA).setVisible(true);
+                    loginWindow.dispose();
+                } catch (SQLException sqle) {
+                    new LoginExceptionWindow(sqle.getMessage()).setVisible(true);
+                } catch (IllegalArgumentException iie) {
+                    new LoginExceptionWindow(iie.getMessage()).setVisible(true);
+                }
             }
+            
+            // If the Close Button is selected, end the program on Exit Code 0
+            else if (e.getSource().equals(loginWindow.closeButton))
+                System.exit(0);
+            
+            // If the Default Database CheckBox is toggled, update the state
+            else if (e.getSource().equals(loginWindow.defaultDatabaseCheckBox))
+            {
+                // Set the enabled state of the URL Bar based on the checkbox
+                loginWindow.databaseURLField.setEnabled(!loginWindow.defaultDatabaseCheckBox.isSelected());
+                
+                // If disabled, re-set the text to the default URL
+                if (!loginWindow.databaseURLField.isEnabled())
+                    loginWindow.databaseURLField.setText(DEFAULT_DATABASE_URL);
             }
         }
         

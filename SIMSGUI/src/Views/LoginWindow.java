@@ -47,9 +47,11 @@ public class LoginWindow extends javax.swing.JFrame {
         loginButton = new javax.swing.JButton();
         loginButton.addActionListener(actionListener);
         closeButton = new javax.swing.JButton();
+        closeButton.addActionListener(actionListener);
         jLabel1 = new javax.swing.JLabel();
         databaseURLField = new javax.swing.JTextField();
         defaultDatabaseCheckBox = new javax.swing.JCheckBox();
+        defaultDatabaseCheckBox.addActionListener(actionListener);
 
         exceptionDialog.setTitle("Login Error");
         exceptionDialog.setAlwaysOnTop(true);
@@ -164,11 +166,6 @@ public class LoginWindow extends javax.swing.JFrame {
         loginButton.setText("Login");
 
         closeButton.setText("Close");
-        closeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                closeButtonActionPerformed(evt);
-            }
-        });
 
         jLabel1.setText("Database URL:");
 
@@ -177,11 +174,6 @@ public class LoginWindow extends javax.swing.JFrame {
 
         defaultDatabaseCheckBox.setSelected(true);
         defaultDatabaseCheckBox.setText("Use Default Database");
-        defaultDatabaseCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                defaultDatabaseCheckBoxActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -237,19 +229,8 @@ public class LoginWindow extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_closeButtonActionPerformed
-
-    private void defaultDatabaseCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_defaultDatabaseCheckBoxActionPerformed
-        if (defaultDatabaseCheckBox.isSelected())
-            databaseURLField.setEnabled(false);
-        else
-            databaseURLField.setEnabled(true);
-    }//GEN-LAST:event_defaultDatabaseCheckBoxActionPerformed
-
     private void acknowledgementButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acknowledgementButtonActionPerformed
-        exceptionDialog.setVisible(false);
+
     }//GEN-LAST:event_acknowledgementButtonActionPerformed
 
 
