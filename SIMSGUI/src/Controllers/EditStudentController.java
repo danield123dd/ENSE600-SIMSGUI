@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import Views.SessionWindow;
+import java.time.format.DateTimeParseException;
 
 public class EditStudentController {
     
@@ -26,11 +27,12 @@ public class EditStudentController {
     Student student;
     
     /**
-     * 
-     * @param sMS
-     * @param sW 
+     * Create a new EditStudentController and spawn a new EditStudentWindow
+     * @param sMS StudentManagementSession which contains the Student to edit
+     * @param sW SessionWindow which contains the desktop to add views to
      */
-    public EditStudentController(StudentManagementSession sMS, SessionWindow sW) {
+    public EditStudentController(StudentManagementSession sMS, SessionWindow sW)
+    {
         this.sMS = sMS;
         this.sW = sW;
         this.student = sMS.student;
@@ -58,7 +60,7 @@ public class EditStudentController {
     }
     
     /**
-     * Removes the view from the desktop
+     * Removes the view from the desktop, and disposes it.
      */
     private void destroyWindow()
     {
@@ -69,11 +71,10 @@ public class EditStudentController {
     }
     
     /**
-     * Updates the Window with the current details from the Model
+     * Updates the View with the current details from the Student Model
      */
     private void updateWindowDetails()
     {
-        // Populate the Fields for the Student Detail Panel
         StudentDetailPanel sDP = editStudentWindow.studentDetailsPanel;
         sDP.firstNameField.setText(student.getFirstName());
         sDP.lastNameField.setText(student.getLastName());
@@ -90,24 +91,31 @@ public class EditStudentController {
     }
     
     /**
-     * Updates the information of the Student Object from the Window
-     * @return      True if the operation is successful
+     * Uses information from the View to update the details of the Student Model
+     * @return True if all parameters of the Student Object can be updated
      * @throws IllegalArgumentException If the Student object refuses the details entered
      */
     private boolean updateStudentModel() throws IllegalArgumentException
     {
-        // Update the Student Object with Details from exisitng fields
+        // Extrapolate the details from the View
         StudentDetailPanel sDP = editStudentWindow.studentDetailsPanel;
         String firstName = sDP.firstNameField.getText();
         String lastName = sDP.lastNameField.getText();
-        LocalDate dateOfBirth = LocalDate.parse(sDP.dateOfBirthField.getText());
         Gender gender = Gender.valueOf(sDP.genderComboField.getSelectedItem().toString().toUpperCase());
         Address address = new Address(sDP.streetAddressField.getText(), sDP.suburbAddressField.getText(), 
                 sDP.cityAddressField.getText(), sDP.countryAddressField.getText(), sDP.zipAddressField.getText());
         String email = sDP.emailAddressField.getText();
         String phone = sDP.phoneNumberField.getText();
         
-        // Now, update the Student Object
+        // Attempt to parse a dateOfBirth - Show an error if this is not possible
+        LocalDate dateOfBirth;
+        try {
+            dateOfBirth = LocalDate.parse(sDP.dateOfBirthField.getText());
+        } catch (DateTimeParseException dtpe) {
+            throw new IllegalArgumentException("The Date of Birth entered is not valid. Please enter the date of birth in YYYY-MM-DD format.");
+        }
+        
+        // Now, update the Student Object and return true if successful
         // If there are any issues, the exception is thrown to the calling method
         student.setFirstName(firstName);
         student.setLastName(lastName);
@@ -116,12 +124,11 @@ public class EditStudentController {
         student.setAddress(address);
         student.setEmail(email);
         student.setPhoneNumber(phone);
-        
         return true;
     }
     
     /**
-     * 
+     * Update the Database with the changes, and if successful, close the EditStudentWindow
      */
     private void updateAndClose()
     {
