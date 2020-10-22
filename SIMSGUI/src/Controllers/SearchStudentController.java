@@ -33,7 +33,7 @@ public class SearchStudentController
     public SearchStudentController (StudentManagementSession sMS) {
         this.sMS = sMS;
         this.sW = sMS.sessionWindow;
-        this.dBA = sMS.dBA;
+        this.dBA = sMS.databaseAgent;
         spawnWindow();
     }
     

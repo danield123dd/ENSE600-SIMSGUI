@@ -11,6 +11,7 @@ public class StudentManagementSession {
     
     // References to the Session Window to create elements on
     static SessionWindow sessionWindow;
+    static DatabaseAgent databaseAgent;
     
     // Reference to the Controllers
     EditStudentController editStudentController;
@@ -19,19 +20,13 @@ public class StudentManagementSession {
     
     // Refernece to Models used
     Student student;
-    
-    
-    
-    
-    // Reference to the Forms
-    DatabaseAgent dBA;
    
     
-    public StudentManagementSession(DatabaseAgent dBA, SessionWindow sessionWindow, boolean newStudent)
+    public StudentManagementSession(DatabaseAgent databaseAgent, SessionWindow sessionWindow, boolean newStudent)
     {
         // Set References
         this.sessionWindow = sessionWindow;
-        this.dBA = dBA;
+        this.databaseAgent = databaseAgent;
         
         // If a New Student is being created, spawn the Create Student Window
         // Otherwise, show the Search Student Window

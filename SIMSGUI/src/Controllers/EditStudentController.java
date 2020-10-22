@@ -25,6 +25,7 @@ public class EditStudentController {
     EditStudentWindow editStudentWindow;
     EditStudentWindowActionListener editStudentWindowActionListener;
     Student student;
+    DatabaseAgent dBA;
     
     /**
      * Create a new EditStudentController and spawn a new EditStudentWindow
@@ -34,6 +35,7 @@ public class EditStudentController {
     {
         this.sMS = sMS;
         this.sW = sMS.sessionWindow;
+        this.dBA = sMS.databaseAgent;
         this.student = sMS.student;
         spawnWindow();
     }
@@ -152,7 +154,7 @@ public class EditStudentController {
         
         // If successful, write the changes back to the database
         try {
-            sMS.dBA.updateStudent(student);
+            dBA.updateStudent(student);
         } catch (SQLException sqle) {
             sW.showExceptionMessage(sqle.getMessage());
             return false;

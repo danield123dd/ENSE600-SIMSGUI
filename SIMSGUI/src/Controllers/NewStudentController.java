@@ -36,7 +36,7 @@ public class NewStudentController {
         // Set Class Variables
         this.sMS = sMS;
         this.sW = sMS.sessionWindow;
-        this.dBA = sMS.dBA;
+        this.dBA = sMS.databaseAgent;
         this.student = sMS.student;
         
         // Create Window
@@ -122,7 +122,7 @@ public class NewStudentController {
         
         // If successful, write the changes back to the database
         try {
-            sMS.dBA.createStudent(student);
+            dBA.createStudent(student);
         } catch (SQLException sqle) {
             sW.showExceptionMessage(sqle.getMessage());
             return false;
