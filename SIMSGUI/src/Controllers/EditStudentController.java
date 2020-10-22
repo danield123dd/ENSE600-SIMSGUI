@@ -1,7 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * EditStudentController Class
+ * A Controller which facilitates user interactions with the EditStudentWindow and Database
+ * Project 2: SIMS GUI Project
+ * @author Daniel Dymond (Group 1 - ID# 17977610) 2020
  */
 package Controllers;
 
@@ -16,10 +17,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import Views.SessionWindow;
 
-/**
- *
- * @author danie
- */
 public class EditStudentController {
     
     StudentManagementSession sMS;
@@ -28,7 +25,11 @@ public class EditStudentController {
     EditStudentWindowActionListener editStudentWindowActionListener;
     Student student;
     
-    
+    /**
+     * 
+     * @param sMS
+     * @param sW 
+     */
     public EditStudentController(StudentManagementSession sMS, SessionWindow sW) {
         this.sMS = sMS;
         this.sW = sW;
@@ -129,18 +130,15 @@ public class EditStudentController {
     }
     
     /**
-     * Requests the Database to push changes to the student object
-     * @return 
+     * Updates the Student Model in the StudentManagementSession using details from the view,
+     * and then attempts to push changes to the Database
+     * @return True if successful, or ExceptionMessageWindow is generated and displayed.
      */
     private boolean updateDatabase()
     {
-        // Boolean Markers to indicate Progress
-        boolean modelUpdated = false;
-        boolean dBUpdated = false;
-        
         // Try to Update the Model, showing an Error Message if not successful
         try {
-            modelUpdated = updateStudentModel();
+            updateStudentModel();
         } catch (IllegalArgumentException iae) {
             sW.showExceptionMessage(iae.getMessage());
             return false;
@@ -154,7 +152,7 @@ public class EditStudentController {
             return false;
         }
         
-        // If successful, return true
+        // If successful, show a confirmation and return true
         sW.showInformationMessage("The Student " + student.getFullName() + " has been updated.");
         return true;
     }
