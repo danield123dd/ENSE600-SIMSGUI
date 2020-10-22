@@ -1,10 +1,10 @@
 package Models;
 
-/*
+/**
  * Student Class
  * Object which stores the Personal and Academic information about a Student in the Institution
- * Project 1: SIMS CLI Project
- * Daniel Dymond (ID# 17977610) 2020
+ * Project 2: SIMS GUI Project
+ * @author Daniel Dymond (Group 1 - ID# 17977610) 2020
  */
 
 import java.time.LocalDate;

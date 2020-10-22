@@ -1,8 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * StudentSearchController Class
+ * A Controller which facilitates user interactions with the SearchStudentWindow and Database
+ * Project 2: SIMS GUI Project
+ * @author Daniel Dymond (Group 1 - ID# 17977610) 2020
  */
+
 package Controllers;
 
 import Models.Student;
@@ -15,20 +17,20 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import Views.SessionWindow;
 
-/**
- *
- * @author danie
- */
-public class SearchStudentController {
-    
+public class SearchStudentController 
+{    
     StudentManagementSession sMS;
     SessionWindow sW;
     SearchStudentWindow searchStudentWindow;
     SearchStudentWindowActionListener searchStudentWindowActionListener;
     DatabaseAgent dBA;
-    
     DefaultTableModel searchResultsModel;
     
+    /**
+     * Create a new StudentSearchController with an associated StudentSearchWindow
+     * @param sMS StudentManagementSession containing the Student Object
+     * @param sW SessionWindow to show Desktop Window's on
+     */
     public SearchStudentController (StudentManagementSession sMS, SessionWindow sW) {
         this.sW = sW;
         this.sMS = sMS;
@@ -37,14 +39,14 @@ public class SearchStudentController {
     }
     
     /**
-     * Generates and Displays the SearchStudentWindow
+     * Generates and Displays the SearchStudentWindow for this StudentManagementSession.
      */
     private void spawnWindow() 
     {
         // Create a new Action Listener
         searchStudentWindowActionListener = new SearchStudentWindowActionListener();
 
-        // Create a Table Model for the Student Search Results
+        // Create a Table Model for the Student Search Results, and populate with columns
         searchResultsModel = new DefaultTableModel();
         searchResultsModel.addColumn("Student ID");
         searchResultsModel.addColumn("First Name");
@@ -59,6 +61,9 @@ public class SearchStudentController {
         searchStudentWindow.setVisible(true);
     }
     
+    /**
+     * Removes the StudentSearchWindow from the Desktop Environment and disposes the window.
+     */
     private void destroyWindow()
     {
         searchStudentWindow.setVisible(false);
@@ -104,68 +109,72 @@ public class SearchStudentController {
     
     /**
      * Instructs the Database to lookup a Student by Name, and finds matches to then be displayed on the results screen
-     * @param firstName First Name to locate
-     * @param lastName  Last Name to locate
+     * @param firstName First Name "contains" expression
+     * @param lastName  Last Name "contains" expression
      */
     private void searchStudentByName (String firstName, String lastName) 
     {
-        // Attempt to Lookup Students in the Database
         try 
         {
+            // Request the Database to search for Students containing the First and Last Name elements
             List<Student> searchResults = dBA.getStudent(firstName, lastName);
             
-            // If a student is found, show the results in the table
+            // If student(s) are found, show the results in the table
             if (searchResults != null && searchResults.size() > 0)
             {
                 populateStudentSearchTableModel(searchResults);
                 searchStudentWindow.studentSearchResultsTable.setRowSelectionAllowed(true);
-            }
-                
-            // Otherwise, show an error message
-            else {
-                sW.showExceptionMessage("No Student was found with their name containing: " + firstName + " " + lastName + ".");
-            }
-        } catch (SQLException sqle) {
+            } 
+            // Otherwise, if no students are found, show an error message
+            else 
+                sW.showExceptionMessage("No Student was found with their name containing: " + firstName + " " + lastName + ".");   
+        }
+        // If a Database Error occurs, show an error message
+        catch (SQLException sqle) {
             sW.showExceptionMessage(sqle.getMessage());
         } 
-        
     }
     
+    /**
+     * Populates the Table Model used in Search Results for the SearchWindow
+     * @param searchResults List of Students to display in the results table
+     */
     private void populateStudentSearchTableModel(List<Student> searchResults) 
     {
+        // Remove any exisitng rows from the Search Results Model
         while (searchResultsModel.getRowCount() > 0)
             searchResultsModel.removeRow(0);
         
+        // Iterate through the Search Results parameter, adding each student to the model
         Iterator<Student> it = searchResults.iterator();
-        
         while (it.hasNext())
         {
             Student stu = it.next();
-
             searchResultsModel.addRow(new String[] {String.valueOf(stu.getStudentID()), stu.getFirstName(), stu.getLastName(), String.valueOf(stu.getDateOfBirth())});    
         }
-
     }
 
-    
     /**
      * Action Listener Class used for Student Search Windows
      */
     public class SearchStudentWindowActionListener implements ActionListener {
 
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent e)
+        {
+            // If the SearchByIDButton is selected, perform a search by Student ID
             if (e.getSource().equals(searchStudentWindow.searchByIDButton))
-            {
                 searchStudentByID(searchStudentWindow.studentIDField.getText());
-            }
+
+            // If the SearchByNameButton is selected, perform a search by Name
             else if (e.getSource().equals(searchStudentWindow.searchByNameButton))
             {
                 String firstName = searchStudentWindow.firstNameField.getText();
-                String lastName = searchStudentWindow.lastNameField.getText();
-                searchResultsModel.addRow(new String[] {"", "", "", ""});                
-                //searchStudentByName(firstName, lastName);
+                String lastName = searchStudentWindow.lastNameField.getText();                
+                searchStudentByName(firstName, lastName);
             }
+            
+            // If the SelectStudentButton is selected, create a EditStudentController
             else if (e.getSource().equals(searchStudentWindow.selectStudentButton))
             {
                 // Determine Selected Paper from the Table
@@ -175,9 +184,6 @@ public class SearchStudentController {
                     searchStudentByID(studentID);
                 }
             }
-           
-            
-            // TODO For FN, LN
         }
     
     }
