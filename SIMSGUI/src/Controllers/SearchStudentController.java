@@ -29,11 +29,10 @@ public class SearchStudentController
     /**
      * Create a new StudentSearchController with an associated StudentSearchWindow
      * @param sMS StudentManagementSession containing the Student Object
-     * @param sW SessionWindow to show Desktop Window's on
      */
-    public SearchStudentController (StudentManagementSession sMS, SessionWindow sW) {
-        this.sW = sW;
+    public SearchStudentController (StudentManagementSession sMS) {
         this.sMS = sMS;
+        this.sW = sMS.sessionWindow;
         this.dBA = sMS.dBA;
         spawnWindow();
     }

@@ -29,12 +29,11 @@ public class EditStudentController {
     /**
      * Create a new EditStudentController and spawn a new EditStudentWindow
      * @param sMS StudentManagementSession which contains the Student to edit
-     * @param sW SessionWindow which contains the desktop to add views to
      */
-    public EditStudentController(StudentManagementSession sMS, SessionWindow sW)
+    public EditStudentController(StudentManagementSession sMS)
     {
         this.sMS = sMS;
-        this.sW = sW;
+        this.sW = sMS.sessionWindow;
         this.student = sMS.student;
         spawnWindow();
     }

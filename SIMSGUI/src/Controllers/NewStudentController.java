@@ -30,13 +30,12 @@ public class NewStudentController {
     /**
      * Create a NewStudentController and spawn a Window on the Desktop
      * @param sMS StudentManagementSession which contains the Student Object
-     * @param sW SessionWindow which contains the Desktop Environment
      */
-    public NewStudentController (StudentManagementSession sMS, SessionWindow sW)
+    public NewStudentController (StudentManagementSession sMS)
     {
         // Set Class Variables
-        this.sW = sW;
         this.sMS = sMS;
+        this.sW = sMS.sessionWindow;
         this.dBA = sMS.dBA;
         this.student = sMS.student;
         

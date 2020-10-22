@@ -41,18 +41,20 @@ public class StudentManagementSession {
             createSearchWindow();
     }
     
-    
+    /**
+     * Create a new NewStudentController to create and handle the New Student View
+     */
     private void createNewWindow()
     {
-        newStudentController = new NewStudentController(this, sessionWindow);  
+        newStudentController = new NewStudentController(this);  
     }
     
     /**
-     * Create a new Search Student Controller to create and handle the Search Student View
+     * Create a new SearchStudentController to create and handle the Search Student View
      */
     private void createSearchWindow()
     {
-        searchStudentController = new SearchStudentController(this, sessionWindow);
+        searchStudentController = new SearchStudentController(this);
     }
     
     /**
@@ -60,7 +62,7 @@ public class StudentManagementSession {
      */
     public void createDetailsWindow() 
     {
-        editStudentController = new EditStudentController(this, sessionWindow);
+        editStudentController = new EditStudentController(this);
     }
     
     
