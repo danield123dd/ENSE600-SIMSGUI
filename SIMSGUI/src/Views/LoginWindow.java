@@ -1,7 +1,6 @@
 package Views;
 
 import Controllers.DatabaseAgent;
-import Views.SIMSGUI;
 import java.sql.SQLException;
 
 /**
@@ -275,7 +274,7 @@ public class LoginWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton acknowledgementButton;
-    private javax.swing.JButton closeButton;
+    public javax.swing.JButton closeButton;
     private javax.swing.JTextField databaseURLField;
     private javax.swing.JCheckBox defaultDatabaseCheckBox;
     private javax.swing.JLabel errorHeader;
@@ -287,7 +286,7 @@ public class LoginWindow extends javax.swing.JFrame {
     private javax.swing.JLabel icon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JButton loginButton;
+    public javax.swing.JButton loginButton;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JTextField usernameField;
