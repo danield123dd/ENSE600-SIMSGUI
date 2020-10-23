@@ -1,13 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * DatabaseAgent Class
+ * An agent which communicates between the Database and a Student Model to 
+ * add/modify students in the Database.
+ * Project 2: SIMS GUI Project
+ * @author Daniel Dymond (Group 1 - ID# 17977610) 2020
  */
 package Controllers;
 
 import Models.Address;
 import Models.Gender;
 import Models.Student;
+import Views.ExceptionWindow;
+import Views.LoginExceptionWindow;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -19,32 +23,45 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-/**
- *
- * @author danie
- */
-public class DatabaseAgent {
-    
+public class DatabaseAgent 
+{
     public Connection conn = null;
     String url;
     String username;
     Statement statement;
     DatabaseMetaData dbmd;
     
+    /**
+     * Creates a new Database Agent, attempting to perform a Login to the Database Server
+     * @param username  Username
+     * @param password  Password
+     * @param url       URL to Database
+     * @throws SQLException If there is a connection error to the Database
+     * @throws IllegalArgumentException If the credentials provided do not meet the requirements to sign on
+     */
     public DatabaseAgent(String username, String password, String url) throws SQLException, IllegalArgumentException
     {
         login(username, password, url);
     }
     
+    /**
+     * Login to the DerbyDB Database.
+     * @param username  Username
+     * @param password  Password
+     * @param url       Database URL
+     * @return          True if the login is successful
+     * @throws SQLException If there is an error connecting to the Database
+     * @throws IllegalArgumentException If there is an error with the details entered into the view.
+     */
     public boolean login (String username, String password, String url) throws SQLException, IllegalArgumentException
     {   
         // Validate inputs, and throw applicable exceptions if any error occurs
         if (username == null || password == null)
-            throw new IllegalArgumentException("The Username or Password was not defined.");
+            throw new IllegalArgumentException("The Username and Password cannot be undefined.");
         else if (username.trim().equals(""))
-            throw new IllegalArgumentException("The Username is empty.");
+            throw new IllegalArgumentException("The Username field is empty.");
         else if (url == null || url.trim().equals(""))
-            throw new SQLException("The Databse URL is not defined.");
+            throw new SQLException("The Databse URL is empty.");
         
         // Otherwise, attempt to connect to the database    
         try 
@@ -65,7 +82,7 @@ public class DatabaseAgent {
     
     /**
      * Logs out of the database, and nullify any important connection information
-     * before garbage collection for security
+     * before garbage collection for security.
      * @return true if successful
      */
     public boolean logout() throws SQLException
@@ -74,6 +91,7 @@ public class DatabaseAgent {
         try {
             if (conn != null)
             {
+                // Close the statement object and connection. Set all to null
                 statement.close();
                 statement = null;
                 conn.close();
@@ -91,6 +109,10 @@ public class DatabaseAgent {
         return false;
     }
 
+    /**
+     * Get the username of the user signed in with this DatabaseAgent
+     * @return Username
+     */
     public String getUsername()
     {
         return this.username;
@@ -116,6 +138,12 @@ public class DatabaseAgent {
         statement.executeUpdate(query);
     }
     
+    /**
+     * Generates the SQL Statement needed to Create a new Student in the Database, 
+     * and then executes the Insert Query
+     * @param student Student to Create
+     * @throws SQLException If an error occurs during the Database Transaction
+     */
     public void createStudent(Student student) throws SQLException
     {
         String query = "INSERT INTO STUDENTS (STUDENT_ID, FIRST_NAME, LAST_NAME, DATE_OF_BIRTH, GENDER, ADDRESS, EMAIL, PHONE_NUMBER) VALUES (";
@@ -135,8 +163,7 @@ public class DatabaseAgent {
      * Obtains a Student based on their Student ID from the Database
      * @param studentID Student ID of Student
      * @return  Student Object if Student is Found, null Otherwise
-     * @throws SQLException
-     * @throws IllegalArgumentException 
+     * @throws SQLException If there is an issue connecting to the Database
      */
     public Student getStudent(String studentID) throws SQLException
     {
@@ -157,14 +184,20 @@ public class DatabaseAgent {
             else
                 toReturn = results.get(0);
         } catch (SQLException sqle) {
-            //System.err.println("There was an error while obtaining the results from the Database.");
+            new ExceptionWindow(sqle.getMessage()).setVisible(true);
         }
         
         // Return the Student Object
         return toReturn;
-        
     }
     
+    /**
+     * Obtains a Student based on a "contains" of the student's first and last name from the Database
+     * @param firstName First Name "contains"
+     * @param lastName Last Name "contains"
+     * @return All Students from the Database which contain both the First Name and Last Name components specified
+     * @throws SQLException If there is an issue connecting to the Database
+     */
     public List<Student> getStudent(String firstName, String lastName) throws SQLException
     {
         ResultSet rS = null;
@@ -182,12 +215,11 @@ public class DatabaseAgent {
             else
                 toReturn = results;
         } catch (SQLException sqle) {
-            //System.err.println("There was an error while obtaining the results from the Database.");
+            new ExceptionWindow(sqle.getMessage()).setVisible(true);
         }
         
         // Return the Student Object
-        return toReturn;
-        
+        return toReturn; 
     }
     
     /**
@@ -196,8 +228,8 @@ public class DatabaseAgent {
      * @return      List of Student Objects
      * @throws SQLException 
      */
-    public List generateStudentObjects(ResultSet rS) throws SQLException {
-        
+    public List generateStudentObjects(ResultSet rS) throws SQLException 
+    {
         List<Student> results = new LinkedList<>();
         
         // If no results are found, return null

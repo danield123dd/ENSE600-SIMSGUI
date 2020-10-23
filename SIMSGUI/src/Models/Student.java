@@ -9,7 +9,7 @@ package Models;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class Student 
+public class Student
 {
     private String firstName;
     private String lastName;
