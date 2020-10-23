@@ -4,7 +4,6 @@
  * Project 2: SIMS GUI Project
  * @author Daniel Dymond (Group 1 - ID# 17977610) 2020
  */
-
 package Controllers;
 
 import Models.Student;
@@ -16,8 +15,9 @@ import java.util.Iterator;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import Views.SessionWindow;
+import java.util.Observable;
 
-public class SearchStudentController 
+public class SearchStudentController extends Observable
 {    
     StudentManagementSession sMS;
     SessionWindow sW;
@@ -53,7 +53,9 @@ public class SearchStudentController
         searchResultsModel.addColumn("Date of Birth");
            
         // Create the Search Student Window
-        searchStudentWindow = new SearchStudentWindow(searchStudentWindowActionListener, searchResultsModel);
+        searchStudentWindow = new SearchStudentWindow(searchStudentWindowActionListener);
+        
+        addObserver(searchStudentWindow);
 
         // Add the window to the desktop and set visible
         sW.getDesktop().add(searchStudentWindow);
@@ -121,7 +123,8 @@ public class SearchStudentController
             // If student(s) are found, show the results in the table
             if (searchResults != null && searchResults.size() > 0)
             {
-                populateStudentSearchTableModel(searchResults);
+                setChanged();
+                notifyObservers(searchResults);
                 searchStudentWindow.studentSearchResultsTable.setRowSelectionAllowed(true);
             } 
             // Otherwise, if no students are found, show an error message
@@ -132,25 +135,6 @@ public class SearchStudentController
         catch (SQLException sqle) {
             sW.showExceptionMessage(sqle.getMessage());
         } 
-    }
-    
-    /**
-     * Populates the Table Model used in Search Results for the SearchWindow
-     * @param searchResults List of Students to display in the results table
-     */
-    private void populateStudentSearchTableModel(List<Student> searchResults) 
-    {
-        // Remove any exisitng rows from the Search Results Model
-        while (searchResultsModel.getRowCount() > 0)
-            searchResultsModel.removeRow(0);
-        
-        // Iterate through the Search Results parameter, adding each student to the model
-        Iterator<Student> it = searchResults.iterator();
-        while (it.hasNext())
-        {
-            Student stu = it.next();
-            searchResultsModel.addRow(new String[] {String.valueOf(stu.getStudentID()), stu.getFirstName(), stu.getLastName(), String.valueOf(stu.getDateOfBirth())});    
-        }
     }
     
     /**

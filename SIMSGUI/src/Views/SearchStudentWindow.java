@@ -6,10 +6,15 @@
  */
 package Views;
 
+import Models.Student;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.table.DefaultTableModel;
 
-public class SearchStudentWindow extends javax.swing.JInternalFrame 
+public class SearchStudentWindow extends javax.swing.JInternalFrame implements Observer
 {
     ActionListener actionListener;
     DefaultTableModel tableModel;
@@ -17,9 +22,9 @@ public class SearchStudentWindow extends javax.swing.JInternalFrame
     /**
      * Creates new form SearchStudentWindow
      */
-    public SearchStudentWindow(ActionListener actionListener, DefaultTableModel tableModel) {
+    public SearchStudentWindow(ActionListener actionListener) {
         this.actionListener = actionListener;
-        this.tableModel = tableModel;
+        initialiseStudentSearchTableModel();
         initComponents();
     }
 
@@ -203,4 +208,45 @@ public class SearchStudentWindow extends javax.swing.JInternalFrame
     public javax.swing.JTextField studentIDField;
     public javax.swing.JTable studentSearchResultsTable;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object arg) 
+    {
+        if (arg instanceof List)
+        {
+            List list = (List<Student>) arg;
+            populateStudentSearchTableModel((List<Student>) arg);
+        }
+    }
+    
+    private void initialiseStudentSearchTableModel()
+    {
+        tableModel = new DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Student ID", "First Name", "Last Name", "Date of Birth"
+            }
+        );
+    }
+    
+    /**
+     * Populates the Table Model used in Search Results for the SearchWindow
+     * @param searchResults List of Students to display in the results table
+     */
+    private void populateStudentSearchTableModel(List<Student> searchResults) 
+    {
+        // Remove any exisitng rows from the Search Results Model
+        while (tableModel.getRowCount() > 0)
+            tableModel.removeRow(0);
+        
+        // Iterate through the Search Results parameter, adding each student to the model
+        Iterator<Student> it = searchResults.iterator();
+        while (it.hasNext())
+        {
+            Student stu = it.next();
+            tableModel.addRow(new String[] {String.valueOf(stu.getStudentID()), stu.getFirstName(), stu.getLastName(), String.valueOf(stu.getDateOfBirth())});    
+        }
+    }
 }
