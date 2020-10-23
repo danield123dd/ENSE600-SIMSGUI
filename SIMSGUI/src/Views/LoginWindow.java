@@ -1,13 +1,14 @@
+/**
+ * LoginWindow Class
+ * A Window which collects login details and triggers the DatabaseAgent to attempt
+ * to log in to the session.
+ * Project 2: SIMS GUI Project
+ * @author Daniel Dymond (Group 1 - ID# 17977610) 2020
+ */
 package Views;
 
-import Controllers.DatabaseAgent;
 import Controllers.LoginController.LoginWindowActionListener;
-import java.sql.SQLException;
 
-/**
- *
- * @author danie
- */
 public class LoginWindow extends javax.swing.JFrame {
     
     LoginWindowActionListener actionListener;
@@ -221,7 +222,6 @@ public class LoginWindow extends javax.swing.JFrame {
     private void acknowledgementButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acknowledgementButtonActionPerformed
 
     }//GEN-LAST:event_acknowledgementButtonActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton acknowledgementButton;
