@@ -84,10 +84,13 @@ public class EditStudentWindow extends javax.swing.JInternalFrame {
         jLabel5.setText("Student Information");
 
         saveAndCloseButton.setText("Save & Close");
+        saveAndCloseButton.setToolTipText("Closes the Details Window, saving any modifications.");
 
         saveButton.setText("Save");
+        saveButton.setToolTipText("Saves the current information to the Database, but keeps this window open.");
 
         cancelButton.setText("Cancel");
+        cancelButton.setToolTipText("Closes the Details Window without saving any modifications.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

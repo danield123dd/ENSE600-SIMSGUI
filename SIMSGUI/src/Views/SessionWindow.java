@@ -95,7 +95,7 @@ public class SessionWindow extends javax.swing.JFrame {
 
         aboutButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/img/info-32px.png"))); // NOI18N
         aboutButton.setText("About");
-        aboutButton.setToolTipText("Change Application preferences and see About information");
+        aboutButton.setToolTipText("View Information about the Application.");
         aboutButton.setFocusable(false);
         aboutButton.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         aboutButton.addActionListener(new java.awt.event.ActionListener() {
@@ -108,7 +108,7 @@ public class SessionWindow extends javax.swing.JFrame {
 
         logoutButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/img/lock-32px.png"))); // NOI18N
         logoutButton.setText("Logout");
-        logoutButton.setToolTipText("Create a new Class for the Institution");
+        logoutButton.setToolTipText("Logout and return to the Log In screen.");
         logoutButton.setFocusable(false);
         logoutButton.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         logoutButton.addActionListener(new java.awt.event.ActionListener() {

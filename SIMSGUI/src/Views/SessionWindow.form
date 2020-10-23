@@ -104,7 +104,7 @@
               <Image iconType="3" name="/Views/img/info-32px.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="About"/>
-            <Property name="toolTipText" type="java.lang.String" value="Change Application preferences and see About information"/>
+            <Property name="toolTipText" type="java.lang.String" value="View Information about the Application."/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
           </Properties>
@@ -121,7 +121,7 @@
               <Image iconType="3" name="/Views/img/lock-32px.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Logout"/>
-            <Property name="toolTipText" type="java.lang.String" value="Create a new Class for the Institution"/>
+            <Property name="toolTipText" type="java.lang.String" value="Logout and return to the Log In screen."/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
           </Properties>
