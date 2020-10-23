@@ -37,9 +37,6 @@ public class LoginWindow extends javax.swing.JFrame {
         icon = new javax.swing.JLabel();
         acknowledgementButton = new javax.swing.JButton();
         errorMessage = new javax.swing.JTextArea();
-        headerPanel = new javax.swing.JPanel();
-        headerGreeting = new javax.swing.JLabel();
-        headerClock = new javax.swing.JLabel();
         usernameLabel = new javax.swing.JLabel();
         passwordLabel = new javax.swing.JLabel();
         usernameField = new javax.swing.JTextField();
@@ -52,6 +49,9 @@ public class LoginWindow extends javax.swing.JFrame {
         databaseURLField = new javax.swing.JTextField();
         defaultDatabaseCheckBox = new javax.swing.JCheckBox();
         defaultDatabaseCheckBox.addActionListener(actionListener);
+        jLabel2 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        headerGreeting = new javax.swing.JLabel();
 
         exceptionDialog.setTitle("Login Error");
         exceptionDialog.setAlwaysOnTop(true);
@@ -133,32 +133,6 @@ public class LoginWindow extends javax.swing.JFrame {
         setName("loginWindowFrame"); // NOI18N
         setResizable(false);
 
-        headerGreeting.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/img/network-database-32px.png"))); // NOI18N
-        headerGreeting.setText("Welcome to SIMS GUI");
-
-        headerClock.setText("XX:YY ZM");
-
-        javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
-        headerPanel.setLayout(headerPanelLayout);
-        headerPanelLayout.setHorizontalGroup(
-            headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(headerPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(headerGreeting)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
-                .addComponent(headerClock)
-                .addContainerGap())
-        );
-        headerPanelLayout.setVerticalGroup(
-            headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(headerPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(headerGreeting)
-                    .addComponent(headerClock))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         usernameLabel.setText("Username:");
 
         passwordLabel.setText("Password:");
@@ -175,11 +149,16 @@ public class LoginWindow extends javax.swing.JFrame {
         defaultDatabaseCheckBox.setSelected(true);
         defaultDatabaseCheckBox.setText("Use Default Database");
 
+        jLabel2.setText("Please enter a Username and Password to log in:");
+
+        headerGreeting.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/img/network-database-32px.png"))); // NOI18N
+        headerGreeting.setText("Welcome to SIMS GUI");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(headerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jSeparator1)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,20 +171,30 @@ public class LoginWindow extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(passwordField)
                             .addComponent(usernameField)
-                            .addComponent(databaseURLField)))
+                            .addComponent(databaseURLField, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(defaultDatabaseCheckBox)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(closeButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(loginButton)))
+                        .addComponent(loginButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(headerGreeting)
+                            .addComponent(jLabel2))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(headerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(headerGreeting)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(usernameLabel)
                     .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -242,12 +231,12 @@ public class LoginWindow extends javax.swing.JFrame {
     private javax.swing.JLabel errorHeader;
     private javax.swing.JTextArea errorMessage;
     private javax.swing.JDialog exceptionDialog;
-    private javax.swing.JLabel headerClock;
     private javax.swing.JLabel headerGreeting;
-    private javax.swing.JPanel headerPanel;
     private javax.swing.JLabel icon;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
     public javax.swing.JButton loginButton;
     public javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordLabel;
