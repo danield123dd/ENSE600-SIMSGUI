@@ -32,12 +32,6 @@ public class LoginWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        exceptionDialog = new javax.swing.JDialog();
-        jPanel1 = new javax.swing.JPanel();
-        errorHeader = new javax.swing.JLabel();
-        icon = new javax.swing.JLabel();
-        acknowledgementButton = new javax.swing.JButton();
-        errorMessage = new javax.swing.JTextArea();
         usernameLabel = new javax.swing.JLabel();
         passwordLabel = new javax.swing.JLabel();
         usernameField = new javax.swing.JTextField();
@@ -53,81 +47,6 @@ public class LoginWindow extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         headerGreeting = new javax.swing.JLabel();
-
-        exceptionDialog.setTitle("Login Error");
-        exceptionDialog.setAlwaysOnTop(true);
-        exceptionDialog.setIconImage(null);
-        exceptionDialog.setMinimumSize(new java.awt.Dimension(400, 200));
-        exceptionDialog.setName("loginExceptionDialog"); // NOI18N
-
-        errorHeader.setText("An error occured while connecting to the Database:");
-
-        icon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/img/error-32px.png"))); // NOI18N
-
-        acknowledgementButton.setText("OK");
-        acknowledgementButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                acknowledgementButtonActionPerformed(evt);
-            }
-        });
-
-        errorMessage.setEditable(false);
-        errorMessage.setBackground(javax.swing.UIManager.getDefaults().getColor("ColorChooser.background"));
-        errorMessage.setColumns(20);
-        errorMessage.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        errorMessage.setRows(5);
-        errorMessage.setWrapStyleWord(true);
-        errorMessage.setBorder(null);
-        errorMessage.setMinimumSize(new java.awt.Dimension(160, 70));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(acknowledgementButton)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(icon)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(errorHeader)
-                            .addComponent(errorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(errorHeader)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(errorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(icon))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(acknowledgementButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout exceptionDialogLayout = new javax.swing.GroupLayout(exceptionDialog.getContentPane());
-        exceptionDialog.getContentPane().setLayout(exceptionDialogLayout);
-        exceptionDialogLayout.setHorizontalGroup(
-            exceptionDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(exceptionDialogLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        exceptionDialogLayout.setVerticalGroup(
-            exceptionDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(exceptionDialogLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SIMS GUI Login");
@@ -219,23 +138,13 @@ public class LoginWindow extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void acknowledgementButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acknowledgementButtonActionPerformed
-
-    }//GEN-LAST:event_acknowledgementButtonActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton acknowledgementButton;
     public javax.swing.JButton closeButton;
     public javax.swing.JTextField databaseURLField;
     public javax.swing.JCheckBox defaultDatabaseCheckBox;
-    private javax.swing.JLabel errorHeader;
-    private javax.swing.JTextArea errorMessage;
-    private javax.swing.JDialog exceptionDialog;
     private javax.swing.JLabel headerGreeting;
-    private javax.swing.JLabel icon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     public javax.swing.JButton loginButton;
     public javax.swing.JPasswordField passwordField;
