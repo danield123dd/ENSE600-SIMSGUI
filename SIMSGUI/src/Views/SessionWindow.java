@@ -50,6 +50,7 @@ public class SessionWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Student Information Management System");
+        setExtendedState(6);
 
         this.setTitle("Student Information Management System - \"" + dBA.getUsername() + "\"");
 
@@ -148,25 +149,7 @@ public class SessionWindow extends javax.swing.JFrame {
      * @param evt 
      */
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
-        // Perform cleanup and logout of connection
-        boolean logout = false;
-        try {
-            logout = dBA.logout();
-        } catch (SQLException sqle) {
-            System.err.println(sqle);
-        } finally {
-            // If the logout is successful, return to login window
-            if (logout) 
-            {
-                new LoginController();
-                this.dispose();
-            } 
-            else
-            {
-                //TODO add forced exit command
-                System.err.println("Error");
-            }
-        }
+        logOut();
     }//GEN-LAST:event_logoutButtonActionPerformed
 
     private void searchStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchStudentButtonActionPerformed
@@ -238,5 +221,27 @@ public class SessionWindow extends javax.swing.JFrame {
         ExceptionWindow eW = new ExceptionWindow(message);
         desktop.add(eW);
         eW.setVisible(true);
+    }
+    
+    public void logOut() {
+        // Perform cleanup and logout of connection
+        boolean logout = false;
+        try {
+            logout = dBA.logout();
+        } catch (SQLException sqle) {
+            System.err.println(sqle);
+        } finally {
+            // If the logout is successful, return to login window
+            if (logout) 
+            {
+                new LoginController();
+                this.dispose();
+            } 
+            else
+            {
+                //TODO add forced exit command
+                System.err.println("Error");
+            }
+        }
     }
 }
