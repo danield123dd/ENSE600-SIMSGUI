@@ -65,13 +65,21 @@
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="21" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="selectStudentButton" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="searchByIDButton" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jScrollPane3" alignment="1" min="-2" pref="421" max="-2" attributes="0"/>
-                          <Component id="searchByNameButton" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="tipText" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="searchByIDButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="tipText1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="searchByNameButton" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -93,7 +101,10 @@
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="searchByIDButton" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="searchByIDButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tipText" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jSeparator2" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -109,12 +120,15 @@
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="searchByNameButton" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="searchByNameButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tipText1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane3" min="-2" pref="162" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="selectStudentButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="15" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -140,6 +154,7 @@
         </Property>
         <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="Search by Student ID"/>
+        <Property name="toolTipText" type="java.lang.String" value="Search for a Student by their 10-digit Student ID."/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="searchByIDRadio.addActionListener(actionListener);"/>
@@ -152,6 +167,7 @@
           <ComponentRef name="searchRadioGroup"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Search by Student Name"/>
+        <Property name="toolTipText" type="java.lang.String" value="Search for a Student by their First and Last Name. Any Student which have names that contain the First and Last Name components will appear in the search results below."/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="searchByNameRadio.addActionListener(actionListener);"/>
@@ -160,7 +176,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="studentIDField">
       <Properties>
-        <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="toolTipText" type="java.lang.String" value="Enter a Student&apos;s 10-digit Student ID, which constists only of numbers."/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -178,7 +194,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="firstNameField">
       <Properties>
-        <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="toolTipText" type="java.lang.String" value="Enter a Student&apos;s First Name."/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <AuxValues>
@@ -192,7 +208,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="lastNameField">
       <Properties>
-        <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="toolTipText" type="java.lang.String" value="Enter a Student&apos;s Last Name."/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <AuxValues>
@@ -231,10 +247,10 @@
     <Component class="javax.swing.JButton" name="selectStudentButton">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Views/img/right-green-arrow-16px.png"/>
+          <Image iconType="3" name="/Views/img/document-edit-16px.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Edit Selected Student"/>
-        <Property name="toolTipText" type="java.lang.String" value="Search for a Student by First and Last Name"/>
+        <Property name="toolTipText" type="java.lang.String" value="Edit the Student selected in the table."/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <AuxValues>
@@ -258,7 +274,6 @@
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="1"/>
             </Property>
-            <Property name="rowSelectionAllowed" type="boolean" value="true"/>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
@@ -270,5 +285,21 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="tipText">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Views/img/bulb-16px.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Search for a Student by their 10-digit Student ID"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="tipText1">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Views/img/bulb-16px.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Leave blank to show all Students."/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>
