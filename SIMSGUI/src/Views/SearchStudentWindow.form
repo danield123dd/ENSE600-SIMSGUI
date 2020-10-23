@@ -176,7 +176,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="studentIDField">
       <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="Enter a Student&apos;s 10-digit Student ID, which constists only of numbers."/>
+        <Property name="toolTipText" type="java.lang.String" value="Enter a Student&apos;s 10-digit Student ID, which consists only of numbers."/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

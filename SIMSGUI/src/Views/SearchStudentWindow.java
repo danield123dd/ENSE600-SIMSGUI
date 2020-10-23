@@ -83,7 +83,7 @@ public class SearchStudentWindow extends javax.swing.JInternalFrame implements O
         searchByNameRadio.setText("Search by Student Name");
         searchByNameRadio.setToolTipText("Search for a Student by their First and Last Name. Any Student which have names that contain the First and Last Name components will appear in the search results below.");
 
-        studentIDField.setToolTipText("Enter a Student's 10-digit Student ID, which constists only of numbers.");
+        studentIDField.setToolTipText("Enter a Student's 10-digit Student ID, which consists only of numbers.");
 
         jLabel1.setText("Student ID:");
 
