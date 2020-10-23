@@ -7,14 +7,19 @@
  */
 package Controllers;
 
+import Views.AboutWindow;
 import Views.SessionWindow;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import javax.swing.JDesktopPane;
 
 public class SessionWindowController 
 {
     SessionWindow sW;
     DatabaseAgent dBA;
+    AboutWindow aboutWindow;
+    JDesktopPane desktop;
     
     public SessionWindowController (DatabaseAgent dBA)
     {
@@ -41,6 +46,40 @@ public class SessionWindowController
         });
     }
     
+    private void showAboutWindow() 
+    {
+        if (AboutWindow != null)
+            return;
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                desktop.add(new AboutWindow()).setVisible(true);
+            }
+        });
+    }
+    
+    public void logOut() {
+        // Perform cleanup and logout of connection
+        boolean logout = false;
+        try {
+            logout = dBA.logout();
+        } catch (SQLException sqle) {
+            System.err.println(sqle);
+        } finally {
+            // If the logout is successful, return to login window
+            if (logout) 
+            {
+                new LoginController();
+                sW.dispose();
+            } 
+            else
+            {
+                //TODO add forced exit command
+                System.err.println("Error");
+            }
+        }
+    }
+    
     /**
      * Action Listener Class used for Session Windows
      */
@@ -49,8 +88,21 @@ public class SessionWindowController
         @Override
         public void actionPerformed(ActionEvent e) 
         {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            // If the SearchStudentButton is selected, create a new SMS with Search
+            if (e.getSource().equals(sW.searchStudentButton))
+                createStudentManagementSession(false);
+            
+            // If the CreateStudentButton is selected, create a new SMS with New Student
+            else if (e.getSource().equals(sW.createStudentButton))
+                createStudentManagementSession(true);
+            
+            // If the AboutButton is selected, show the About Window
+            else if (e.getSource().equals(sW.aboutButton))
+                showAboutWindow();
+            
+            // If the LogoutButton is selected, logout of the database
+            else if (e.getSource().equals(sW.logoutButton))
+                //
         }
-        
     }
 }
