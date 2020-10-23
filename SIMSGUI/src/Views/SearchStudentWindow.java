@@ -188,7 +188,6 @@ public class SearchStudentWindow extends javax.swing.JInternalFrame implements O
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTextField firstNameField;
     private javax.swing.JLabel heroLabel;
@@ -209,6 +208,11 @@ public class SearchStudentWindow extends javax.swing.JInternalFrame implements O
     public javax.swing.JTable studentSearchResultsTable;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Observer Method to call for an update to the StudentSearchModel
+     * @param o Observable which has triggered the update
+     * @param arg Object passed by the observable
+     */
     @Override
     public void update(Observable o, Object arg) 
     {
@@ -219,12 +223,12 @@ public class SearchStudentWindow extends javax.swing.JInternalFrame implements O
         }
     }
     
+    /**
+     * Initialises the DefaultTableModel used to display the Search Results
+     */
     private void initialiseStudentSearchTableModel()
     {
-        tableModel = new DefaultTableModel(
-            new Object [][] {
-
-            },
+        tableModel = new DefaultTableModel(new Object [][] {},
             new String [] {
                 "Student ID", "First Name", "Last Name", "Date of Birth"
             }
