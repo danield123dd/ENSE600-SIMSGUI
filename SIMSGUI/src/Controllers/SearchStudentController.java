@@ -177,7 +177,7 @@ public class SearchStudentController extends Observable
             {
                 // Determine Selected Paper from the Table
                 int selectedRow = searchStudentWindow.studentSearchResultsTable.getSelectedRow();
-                if (selectedRow != -1) {
+                if (selectedRow >= 0) {
                     String studentID = searchStudentWindow.studentSearchResultsTable.getValueAt(selectedRow, 0).toString();
                     searchStudentByID(studentID);
                 }

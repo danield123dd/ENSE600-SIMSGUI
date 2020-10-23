@@ -60,6 +60,8 @@ public class DatabaseAgent
             throw new IllegalArgumentException("The Username and Password cannot be undefined.");
         else if (username.trim().equals(""))
             throw new IllegalArgumentException("The Username field is empty.");
+        else if (password.trim().equals(""))
+            throw new IllegalArgumentException("The Password field is empty.");
         else if (url == null || url.trim().equals(""))
             throw new SQLException("The Databse URL is empty.");
         
