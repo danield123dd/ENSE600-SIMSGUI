@@ -1,31 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * SessionWindow Class
+ * A View which shows and hosts other windows.
+ * Project 2: SIMS GUI Project
+ * @author Daniel Dymond (Group 1 - ID# 17977610) 2020
  */
 package Views;
 
-import Controllers.DatabaseAgent;
-import Controllers.LoginController;
-import Controllers.StudentManagementSession;
-import java.sql.SQLException;
-import javax.swing.JDesktopPane;
+import java.awt.event.ActionListener;
 
-/**
- *
- * @author danie
- */
-public class SessionWindow extends javax.swing.JFrame {
-    
-    static DatabaseAgent dBA;
+public class SessionWindow extends javax.swing.JFrame 
+{
+    ActionListener actionListener;
 
     /**
      * Creates new form SessionWindow
      */
-    public SessionWindow(DatabaseAgent dBA) {
-        this.dBA = dBA;
+    public SessionWindow(ActionListener actionListener) {
+        this.actionListener = actionListener;
         initComponents();
-        setVisible(true);
     }
 
     /**
@@ -45,14 +37,11 @@ public class SessionWindow extends javax.swing.JFrame {
         aboutButton = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        usernameLabel = new javax.swing.JLabel();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Student Information Management System");
         setExtendedState(6);
-
-        this.setTitle("Student Information Management System - \"" + dBA.getUsername() + "\"");
 
         javax.swing.GroupLayout desktopLayout = new javax.swing.GroupLayout(desktop);
         desktop.setLayout(desktopLayout);
@@ -73,11 +62,7 @@ public class SessionWindow extends javax.swing.JFrame {
         searchStudentButton.setToolTipText("Search for a Student by either their Student ID or via their name");
         searchStudentButton.setFocusable(false);
         searchStudentButton.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        searchStudentButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchStudentButtonActionPerformed(evt);
-            }
-        });
+        searchStudentButton.addActionListener(actionListener);
         toolbar.add(searchStudentButton);
 
         createStudentButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/img/user-add-32px.png"))); // NOI18N
@@ -85,11 +70,7 @@ public class SessionWindow extends javax.swing.JFrame {
         createStudentButton.setToolTipText("Create a new Student to add to the Institution");
         createStudentButton.setFocusable(false);
         createStudentButton.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        createStudentButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createStudentButtonActionPerformed(evt);
-            }
-        });
+        createStudentButton.addActionListener(actionListener);
         toolbar.add(createStudentButton);
         toolbar.add(jSeparator1);
 
@@ -98,11 +79,7 @@ public class SessionWindow extends javax.swing.JFrame {
         aboutButton.setToolTipText("View Information about the Application.");
         aboutButton.setFocusable(false);
         aboutButton.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        aboutButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aboutButtonActionPerformed(evt);
-            }
-        });
+        aboutButton.addActionListener(actionListener);
         toolbar.add(aboutButton);
         aboutButton.getAccessibleContext().setAccessibleDescription("See information about this application");
 
@@ -111,18 +88,9 @@ public class SessionWindow extends javax.swing.JFrame {
         logoutButton.setToolTipText("Logout and return to the Log In screen.");
         logoutButton.setFocusable(false);
         logoutButton.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        logoutButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoutButtonActionPerformed(evt);
-            }
-        });
+        logoutButton.addActionListener(actionListener);
         toolbar.add(logoutButton);
         toolbar.add(filler1);
-
-        usernameLabel.setText("Username");
-        usernameLabel.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        usernameLabel.setText(dBA.getUsername());
-        toolbar.add(usernameLabel);
         toolbar.add(filler2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -144,104 +112,15 @@ public class SessionWindow extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * When the logout completes
-     * @param evt 
-     */
-    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
-        logOut();
-    }//GEN-LAST:event_logoutButtonActionPerformed
-
-    private void searchStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchStudentButtonActionPerformed
-        // TODO add your handling code here:
-        SessionWindow sW = this;
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new StudentManagementSession(dBA, sW, false);
-            }
-        });
-    }//GEN-LAST:event_searchStudentButtonActionPerformed
-
-    /**
-     * Open the About Window
-     * @param evt 
-     */
-    private void aboutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutButtonActionPerformed
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                desktop.add(new AboutWindow()).setVisible(true);
-            }
-        });
-    }//GEN-LAST:event_aboutButtonActionPerformed
-
-    private void createStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createStudentButtonActionPerformed
-        // TODO add your handling code here:
-        SessionWindow sW = this;
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new StudentManagementSession(dBA, sW, true);
-            }
-        });
-    }//GEN-LAST:event_createStudentButtonActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton aboutButton;
-    private javax.swing.JButton createStudentButton;
-    private javax.swing.JDesktopPane desktop;
+    public javax.swing.JButton aboutButton;
+    public javax.swing.JButton createStudentButton;
+    public javax.swing.JDesktopPane desktop;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
     private javax.swing.JToolBar.Separator jSeparator1;
-    private javax.swing.JButton logoutButton;
-    private javax.swing.JButton searchStudentButton;
+    public javax.swing.JButton logoutButton;
+    public javax.swing.JButton searchStudentButton;
     private javax.swing.JToolBar toolbar;
-    private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
-
-    public JDesktopPane getDesktop()
-    {
-        return this.desktop;
-    }
-    
-    /**
-     * Creates a new Information Dialog in the Desktop Environment
-     * @param message Message to Show
-     */
-    public void showInformationMessage(String message) {
-        InformationWindow iW = new InformationWindow(message);
-        desktop.add(iW);
-        iW.setVisible(true);
-    }
-
-    /**
-     * Creates a new Exception Dialog in the Desktop Environment
-     * @param message Message to Show
-     */
-    public void showExceptionMessage(String message) {
-        ExceptionWindow eW = new ExceptionWindow(message);
-        desktop.add(eW);
-        eW.setVisible(true);
-    }
-    
-    public void logOut() {
-        // Perform cleanup and logout of connection
-        boolean logout = false;
-        try {
-            logout = dBA.logout();
-        } catch (SQLException sqle) {
-            System.err.println(sqle);
-        } finally {
-            // If the logout is successful, return to login window
-            if (logout) 
-            {
-                new LoginController();
-                this.dispose();
-            } 
-            else
-            {
-                //TODO add forced exit command
-                System.err.println("Error");
-            }
-        }
-    }
 }

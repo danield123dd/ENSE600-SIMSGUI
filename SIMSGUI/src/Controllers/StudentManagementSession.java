@@ -13,7 +13,7 @@ import Views.SessionWindow;
 public class StudentManagementSession 
 {
     // References to the Session Window and DatabaseAgent for Controllers
-    static SessionWindow sessionWindow;
+    static SessionWindowController sessionWindowController;
     static DatabaseAgent databaseAgent;
     
     // Reference to the Controllers
@@ -30,10 +30,10 @@ public class StudentManagementSession
      * @param sessionWindow SessionWindow containing the Desktop environment to display windows on
      * @param newStudent Set true if creating a New Student, or false to edit an Existing Student
      */
-    public StudentManagementSession(DatabaseAgent databaseAgent, SessionWindow sessionWindow, boolean newStudent)
+    public StudentManagementSession(DatabaseAgent databaseAgent, SessionWindowController sessionWindowController, boolean newStudent)
     {
         // Set References
-        this.sessionWindow = sessionWindow;
+        this.sessionWindowController = sessionWindowController;
         this.databaseAgent = databaseAgent;
         
         // If a New Student is being created, spawn the Create Student Window

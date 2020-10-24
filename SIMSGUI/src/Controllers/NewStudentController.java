@@ -21,7 +21,7 @@ import java.time.format.DateTimeParseException;
 public class NewStudentController {
     
     private final StudentManagementSession sMS;
-    private final SessionWindow sW;
+    private final SessionWindowController sWC;
     private NewStudentWindow newStudentWindow;
     private NewStudentActionListener newStudentActionListener;
     private static DatabaseAgent dBA;
@@ -35,7 +35,7 @@ public class NewStudentController {
     {
         // Set Class Variables
         this.sMS = sMS;
-        this.sW = sMS.sessionWindow;
+        this.sWC = sMS.sessionWindowController;
         this.dBA = sMS.databaseAgent;
         this.student = sMS.student;
         
@@ -58,7 +58,7 @@ public class NewStudentController {
         newStudentWindow.studentDetailsPanel.studentIDField.setText("##########");
         
         // Finally, add the window to the desktop manager and set visible
-        sW.getDesktop().add(newStudentWindow);
+        sWC.getDesktop().add(newStudentWindow);
         newStudentWindow.setVisible(true);
     }
     
@@ -68,7 +68,7 @@ public class NewStudentController {
     private void destroyWindow()
     {
         this.newStudentWindow.setVisible(false);
-        sW.getDesktop().remove(this.newStudentWindow);
+        sWC.getDesktop().remove(this.newStudentWindow);
         this.newStudentWindow.dispose();
         this.newStudentWindow = null;
     }
@@ -116,7 +116,7 @@ public class NewStudentController {
         try {
             createStudentModel();
         } catch (IllegalArgumentException iae) {
-            sW.showExceptionMessage(iae.getMessage());
+            sWC.showExceptionMessage(iae.getMessage());
             return false;
         }
         
@@ -124,12 +124,12 @@ public class NewStudentController {
         try {
             dBA.createStudent(student);
         } catch (SQLException sqle) {
-            sW.showExceptionMessage(sqle.getMessage());
+            sWC.showExceptionMessage(sqle.getMessage());
             return false;
         }
         
         // If successful, show Information Message and return true
-        sW.showInformationMessage("The Student " + student.getFullName() + " has been created with Student ID: " + student.getStudentID() + ".");
+        sWC.showInformationMessage("The Student " + student.getFullName() + " has been created with Student ID: " + student.getStudentID() + ".");
         return true;
     }
     

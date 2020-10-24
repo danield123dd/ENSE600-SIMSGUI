@@ -20,7 +20,7 @@ import java.util.Observable;
 public class SearchStudentController extends Observable
 {    
     StudentManagementSession sMS;
-    SessionWindow sW;
+    SessionWindowController sWC;
     SearchStudentWindow searchStudentWindow;
     SearchStudentWindowActionListener searchStudentWindowActionListener;
     DatabaseAgent dBA;
@@ -32,7 +32,7 @@ public class SearchStudentController extends Observable
      */
     public SearchStudentController (StudentManagementSession sMS) {
         this.sMS = sMS;
-        this.sW = sMS.sessionWindow;
+        this.sWC = sMS.sessionWindowController;
         this.dBA = sMS.databaseAgent;
         spawnWindow();
     }
@@ -58,7 +58,7 @@ public class SearchStudentController extends Observable
         addObserver(searchStudentWindow);
 
         // Add the window to the desktop and set visible
-        sW.getDesktop().add(searchStudentWindow);
+        sWC.getDesktop().add(searchStudentWindow);
         searchStudentWindow.setVisible(true);
     }
     
@@ -68,7 +68,7 @@ public class SearchStudentController extends Observable
     private void destroyWindow()
     {
         searchStudentWindow.setVisible(false);
-        sW.getDesktop().remove(searchStudentWindow);
+        sWC.getDesktop().remove(searchStudentWindow);
         searchStudentWindow.dispose();
         searchStudentWindow = null;
     }
@@ -83,7 +83,7 @@ public class SearchStudentController extends Observable
         id = id.trim();
         if (!id.replaceAll("[0-9]", "").equals(""))
         {
-            sW.showExceptionMessage("The Student ID entered is in an invalid format. It should only consist of numbers.");
+            sWC.showExceptionMessage("The Student ID entered is in an invalid format. It should only consist of numbers.");
             return;
         }
             
@@ -101,10 +101,10 @@ public class SearchStudentController extends Observable
             
             // Otherwise, show an error message
             else {
-                sW.showExceptionMessage("No Student was found with the Student ID: " + id + ". Please verify the ID number entered, or try locate the student by name.");
+                sWC.showExceptionMessage("No Student was found with the Student ID: " + id + ". Please verify the ID number entered, or try locate the student by name.");
             }
         } catch (SQLException sqle) {
-            sW.showExceptionMessage(sqle.getMessage());
+            sWC.showExceptionMessage(sqle.getMessage());
         } 
     }
     
@@ -129,11 +129,11 @@ public class SearchStudentController extends Observable
             } 
             // Otherwise, if no students are found, show an error message
             else 
-                sW.showExceptionMessage("No Student was found with their name containing: " + firstName + " " + lastName + ".");   
+                sWC.showExceptionMessage("No Student was found with their name containing: " + firstName + " " + lastName + ".");   
         }
         // If a Database Error occurs, show an error message
         catch (SQLException sqle) {
-            sW.showExceptionMessage(sqle.getMessage());
+            sWC.showExceptionMessage(sqle.getMessage());
         } 
     }
     

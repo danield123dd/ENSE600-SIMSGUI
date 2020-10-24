@@ -21,7 +21,7 @@ import java.time.format.DateTimeParseException;
 public class EditStudentController {
     
     StudentManagementSession sMS;
-    SessionWindow sW;
+    SessionWindowController sWC;
     EditStudentWindow editStudentWindow;
     EditStudentWindowActionListener editStudentWindowActionListener;
     Student student;
@@ -34,7 +34,7 @@ public class EditStudentController {
     public EditStudentController(StudentManagementSession sMS)
     {
         this.sMS = sMS;
-        this.sW = sMS.sessionWindow;
+        this.sWC = sMS.sessionWindowController;
         this.dBA = sMS.databaseAgent;
         this.student = sMS.student;
         spawnWindow();
@@ -56,7 +56,7 @@ public class EditStudentController {
         updateWindowDetails();
         
         // Add the window to the desktop and set visible
-        sW.getDesktop().add(editStudentWindow);
+        sWC.getDesktop().add(editStudentWindow);
         editStudentWindow.setVisible(true);
     }
     
@@ -66,7 +66,7 @@ public class EditStudentController {
     private void destroyWindow()
     {
         this.editStudentWindow.setVisible(false);
-        sW.getDesktop().remove(this.editStudentWindow);
+        sWC.getDesktop().remove(this.editStudentWindow);
         this.editStudentWindow.dispose();
         this.editStudentWindow = null;
     }
@@ -148,7 +148,7 @@ public class EditStudentController {
         try {
             updateStudentModel();
         } catch (IllegalArgumentException iae) {
-            sW.showExceptionMessage(iae.getMessage());
+            sWC.showExceptionMessage(iae.getMessage());
             return false;
         }
         
@@ -156,12 +156,12 @@ public class EditStudentController {
         try {
             dBA.updateStudent(student);
         } catch (SQLException sqle) {
-            sW.showExceptionMessage(sqle.getMessage());
+            sWC.showExceptionMessage(sqle.getMessage());
             return false;
         }
         
         // If successful, show a confirmation and return true
-        sW.showInformationMessage("The Student " + student.getFullName() + " has been updated.");
+        sWC.showInformationMessage("The Student " + student.getFullName() + " has been updated.");
         return true;
     }
     

@@ -8,11 +8,15 @@
 package Controllers;
 
 import Views.AboutWindow;
+import Views.ExceptionWindow;
+import Views.InformationWindow;
+import Views.SearchStudentWindow;
 import Views.SessionWindow;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import javax.swing.JDesktopPane;
+import javax.swing.table.DefaultTableModel;
 
 public class SessionWindowController 
 {
@@ -20,6 +24,7 @@ public class SessionWindowController
     DatabaseAgent dBA;
     AboutWindow aboutWindow;
     JDesktopPane desktop;
+    SessionWindowActionListener sessionWindowActionListener;
     
     public SessionWindowController (DatabaseAgent dBA)
     {
@@ -29,7 +34,18 @@ public class SessionWindowController
     
     private void spawnWindow()
     {
+        // Create a new Action Listener
+        sessionWindowActionListener = new SessionWindowActionListener();
+           
+        // Create the Session Window
+        sW = new SessionWindow(sessionWindowActionListener);
+        sW.setTitle("Student Information Management System - \"" + dBA.getUsername() + "\"");
         
+        // Show the Window
+        sW.setVisible(true);
+        
+        // Set the Desktop reference
+        this.desktop = sW.desktop;
     }
     
     /**
@@ -39,18 +55,23 @@ public class SessionWindowController
      */
     private void createStudentManagementSession (boolean newStudent) 
     {
+        SessionWindowController sWC = this;
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StudentManagementSession(dBA, sW, newStudent);
+                new StudentManagementSession(dBA, sWC, newStudent);
             }
         });
     }
     
+    /**
+     * Show's the About Window in the SessionWindow
+     */
     private void showAboutWindow() 
     {
-        if (AboutWindow != null)
+        if (aboutWindow != null)
             return;
-        /* Create and display the form */
+        
+        // Create and display the form
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 desktop.add(new AboutWindow()).setVisible(true);
@@ -58,7 +79,11 @@ public class SessionWindowController
         });
     }
     
-    public void logOut() {
+    /**
+     * Perform the Logout Sequence for disconnecting from the database.
+     */
+    public void logOut() 
+    {
         // Perform cleanup and logout of connection
         boolean logout = false;
         try {
@@ -78,6 +103,26 @@ public class SessionWindowController
                 System.err.println("Error");
             }
         }
+    }
+    
+    /**
+     * Creates a new Information Dialog in the Desktop Environment
+     * @param message Message to Show
+     */
+    public void showInformationMessage(String message) {
+        InformationWindow iW = new InformationWindow(message);
+        desktop.add(iW);
+        iW.setVisible(true);
+    }
+
+    /**
+     * Creates a new Exception Dialog in the Desktop Environment
+     * @param message Message to Show
+     */
+    public void showExceptionMessage(String message) {
+        ExceptionWindow eW = new ExceptionWindow(message);
+        desktop.add(eW);
+        eW.setVisible(true);
     }
     
     /**
@@ -102,7 +147,12 @@ public class SessionWindowController
             
             // If the LogoutButton is selected, logout of the database
             else if (e.getSource().equals(sW.logoutButton))
-                //
+                logOut();
         }
+    }
+    
+    public JDesktopPane getDesktop()
+    {
+        return this.desktop;
     }
 }

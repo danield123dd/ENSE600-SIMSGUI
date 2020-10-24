@@ -8,7 +8,6 @@ package Controllers;
 
 import Views.LoginExceptionWindow;
 import Views.LoginWindow;
-import Views.SessionWindow;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -71,7 +70,7 @@ public class LoginController
             dBA = new Controllers.DatabaseAgent(loginWindow.usernameField.getText(), new String(loginWindow.passwordField.getPassword()), loginWindow.databaseURLField.getText());
             
             // If dBA is successful, create a new Session Window
-            new SessionWindow(dBA).setVisible(true);
+            new SessionWindowController(dBA);
             loginWindow.dispose();
         } 
         
