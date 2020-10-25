@@ -33,6 +33,7 @@ public class AboutWindow extends javax.swing.JInternalFrame
         jLabel2 = new javax.swing.JLabel();
 
         setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         setTitle("About SIMS GUI");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/img/info-16px.png"))); // NOI18N
 

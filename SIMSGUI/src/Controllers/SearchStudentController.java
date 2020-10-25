@@ -11,10 +11,8 @@ import Views.SearchStudentWindow;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.Iterator;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import Views.SessionWindow;
 import java.util.Observable;
 
 public class SearchStudentController extends Observable
@@ -187,7 +185,5 @@ public class SearchStudentController extends Observable
             else if (e.getSource().equals(searchStudentWindow.searchByIDRadio) || e.getSource().equals(searchStudentWindow.searchByNameRadio))
                 toggleViewFields();
         }
-    
-    }
-    
+    } 
 }

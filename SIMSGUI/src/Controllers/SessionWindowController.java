@@ -68,15 +68,20 @@ public class SessionWindowController
      */
     private void showAboutWindow() 
     {
+        // If an AboutWindow already exists, set to visible and bring to front
         if (aboutWindow != null)
-            return;
+        {
+            aboutWindow.setVisible(true);
+            aboutWindow.toFront();
+        }
         
-        // Create and display the form
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                desktop.add(new AboutWindow()).setVisible(true);
-            }
-        });
+        // Otherwise, create a new AboutWindow and display
+        else
+        {
+            aboutWindow = new AboutWindow();
+            desktop.add(aboutWindow);
+            aboutWindow.setVisible(true);
+        }
     }
     
     /**
