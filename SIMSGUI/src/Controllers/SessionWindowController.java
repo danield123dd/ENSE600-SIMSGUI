@@ -10,13 +10,11 @@ package Controllers;
 import Views.AboutWindow;
 import Views.ExceptionWindow;
 import Views.InformationWindow;
-import Views.SearchStudentWindow;
 import Views.SessionWindow;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import javax.swing.JDesktopPane;
-import javax.swing.table.DefaultTableModel;
 
 public class SessionWindowController 
 {

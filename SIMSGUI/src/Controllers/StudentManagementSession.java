@@ -8,7 +8,6 @@
 package Controllers;
 
 import Models.Student;
-import Views.SessionWindow;
 
 public class StudentManagementSession 
 {
