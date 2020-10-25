@@ -11,7 +11,6 @@ import Models.Address;
 import Models.Gender;
 import Models.Student;
 import Views.ExceptionWindow;
-import Views.LoginExceptionWindow;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -202,13 +201,12 @@ public class DatabaseAgent
      */
     public List<Student> getStudent(String firstName, String lastName) throws SQLException
     {
-        ResultSet rS = null;
         List<Student> toReturn = null;
         
         // Attempt to lookup the Student from the Database based on Student ID
         try {
             String query = "SELECT * FROM STUDENTS WHERE LOWER(FIRST_NAME) LIKE '%" + firstName.toLowerCase() + "%' AND LOWER(LAST_NAME) LIKE '%" + lastName.toLowerCase() + "%'";
-            rS = statement.executeQuery(query);
+            ResultSet rS = statement.executeQuery(query);
             List<Student> results = generateStudentObjects(rS);
             
             // If student(s) are found, the lookup is successful. Otheriwse, perform appropriate error measure
@@ -220,7 +218,7 @@ public class DatabaseAgent
             new ExceptionWindow(sqle.getMessage()).setVisible(true);
         }
         
-        // Return the Student Object
+        // Return the Student Objects
         return toReturn; 
     }
     
@@ -263,45 +261,38 @@ public class DatabaseAgent
         
     }
     
-    
-    
-
-    
-    
     /**
      * Generates a new randomised Student ID, and checks to ensure the database does not have an existing student with an identical number
      */
     public String generateNewStudentID()
     {
         String newID;
-        boolean uniqueStudentIDGenerated = false;
+        int numOfAttempts = 0;
         
-        // Generate a new Student ID, ensuring it does not exist already in the Database
-        while (!uniqueStudentIDGenerated)
+        // Generate a new Student ID, ensuring it does not exist already in the Database - will time out after 100 attempts
+        while (numOfAttempts++ < 100)
         {
             // Student ID's consist of the last two digits of the year, then the numerical value of the month, and then 5 extra random digits
             int year = LocalDate.now().getYear();
             int month = LocalDate.now().getMonthValue();
-            
             String yearComp = Integer.toString(year).substring(2);
             String monthComp = Integer.toString(month);
+            
             if (monthComp.length() == 1)
                 monthComp = "0" + monthComp;
-            
+       
             int fiveRandDigits = new Random().nextInt(89999) + 10000;
             newID = yearComp + monthComp + Integer.toString(fiveRandDigits);
             
             // Now, check to see if the ID is unique
             try
             {
-                String query = "SELECT * FROM STUDENTS WHERE STUDENT_ID='" + newID + "'";
-                ResultSet rS = statement.executeQuery(query);
-                if (!rS.next())
+                if (getStudent(newID) == null)
                     return newID;
             }
             catch (SQLException sqle) {
                 return null;
-            }
+            } 
         }
 
         return null;
