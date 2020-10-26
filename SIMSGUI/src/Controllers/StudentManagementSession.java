@@ -25,15 +25,14 @@ public class StudentManagementSession
    
     /**
      * Creates a new StudentManagement Session, and spawns the corresponding window based on intended outcome.
-     * @param databaseAgent DatabaseAgent containing the Database session to interact with
-     * @param sessionWindow SessionWindow containing the Desktop environment to display windows on
+     * @param sessionWindowController SessionWindowController containing the Desktop environment to display windows on
      * @param newStudent Set true if creating a New Student, or false to edit an Existing Student
      */
-    public StudentManagementSession(DatabaseAgent databaseAgent, SessionWindowController sessionWindowController, boolean newStudent)
+    public StudentManagementSession(SessionWindowController sessionWindowController, boolean newStudent)
     {
         // Set References
         this.sessionWindowController = sessionWindowController;
-        this.databaseAgent = databaseAgent;
+        this.databaseAgent = sessionWindowController.dBA;
         
         // If a New Student is being created, spawn the Create Student Window
         // Otherwise, show the Search Student Window

@@ -56,7 +56,7 @@ public class SessionWindowController
         SessionWindowController sWC = this;
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StudentManagementSession(dBA, sWC, newStudent);
+                new StudentManagementSession(sWC, newStudent);
             }
         });
     }

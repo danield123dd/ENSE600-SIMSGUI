@@ -202,7 +202,7 @@ public class Student
      * @throws IllegalArgumentException  Thrown if the phone number contains characters other than numbers and "(", ")" "-" or " "
      */
     public void setPhoneNumber(String phoneNumber) throws IllegalArgumentException {
-        if (phoneNumber == null || phoneNumber == "" || !phoneNumber.replaceAll("[0-9() -]", "").equals("")) {
+        if (phoneNumber == null || phoneNumber.trim().equals("") || !phoneNumber.replaceAll("[0-9() -]", "").equals("")) {
             throw new IllegalArgumentException("The phone number provided is invalid.");
         } else {
             this.phoneNumber = phoneNumber.trim();
