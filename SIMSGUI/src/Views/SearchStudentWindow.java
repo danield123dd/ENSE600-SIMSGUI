@@ -21,6 +21,7 @@ public class SearchStudentWindow extends javax.swing.JInternalFrame implements O
     
     /**
      * Creates new form SearchStudentWindow
+     * @param actionListener ActionListner from the Controller
      */
     public SearchStudentWindow(ActionListener actionListener) {
         this.actionListener = actionListener;

@@ -15,7 +15,7 @@ public class LoginWindow extends javax.swing.JFrame {
 
     /**
      * Creates new form LoginWindow
-     * @param session
+     * @param actionListener ActionListener from the Controller
      */
     public LoginWindow(LoginWindowActionListener actionListener) {
         this.actionListener = actionListener;

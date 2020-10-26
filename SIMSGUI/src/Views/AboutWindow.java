@@ -8,7 +8,6 @@ package Views;
 
 public class AboutWindow extends javax.swing.JInternalFrame 
 {
-
     /**
      * Creates new form AboutWindow
      */

@@ -1,20 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * LoginExceptionWindow Class
+ * A JFrame used to show Exceptions when error occur within the application
+ * Project 2: SIMS GUI Project
+ * @author Daniel Dymond (Group 1 - ID# 17977610) 2020
  */
 package Views;
 
-/**
- *
- * @author danie
- */
-public class LoginExceptionWindow extends javax.swing.JFrame {
-
+public class LoginExceptionWindow extends javax.swing.JFrame 
+{
     String message;
     
     /**
      * Creates new form LoginExceptionWindow
+     * @param message Message to Display in the Window
      */
     public LoginExceptionWindow(String message) {
         this.message = message;

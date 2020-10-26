@@ -1,22 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * EditStudentWindow Class
+ * A window which allows a user to interact with data handled by the EditStudentController
+ * Project 2: SIMS GUI Project
+ * @author Daniel Dymond (Group 1 - ID# 17977610) 2020
  */
 package Views;
 
 import java.awt.event.ActionListener;
 
-/**
- *
- * @author danie
- */
-public class EditStudentWindow extends javax.swing.JInternalFrame {
-    
+public class EditStudentWindow extends javax.swing.JInternalFrame 
+{
     ActionListener actionListener;
 
     /**
      * Creates new form StudentDetailsWindow
+     * @param actionListener ActionListner object from Controller
      */
     public EditStudentWindow(ActionListener actionListener) {
         this.actionListener = actionListener;

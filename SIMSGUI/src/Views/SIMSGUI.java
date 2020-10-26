@@ -1,15 +1,15 @@
+/**
+ * SIMSGUI Class
+ * The Root Class which loads the login window
+ * Project 2: SIMS GUI Project
+ * @author Daniel Dymond (Group 1 - ID# 17977610) 2020
+ */
 package Views;
 
 import Controllers.LoginController;
 
-/**
- * SIMS GUI
- * @author danie
- */
-public class SIMSGUI {
-    
-    // The Database Agent which facilitates I/O between the Application and Database
-    // This object is handed between the login and logout
+public class SIMSGUI 
+{
     public static Controllers.DatabaseAgent dBA;
     
     /**

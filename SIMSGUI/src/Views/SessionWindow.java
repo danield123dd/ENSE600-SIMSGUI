@@ -14,6 +14,7 @@ public class SessionWindow extends javax.swing.JFrame
 
     /**
      * Creates new form SessionWindow
+     * @param actionListener ActionListner Object from the Controller
      */
     public SessionWindow(ActionListener actionListener) {
         this.actionListener = actionListener;

@@ -1,19 +1,21 @@
-package Views;
-
-import java.awt.event.ActionListener;
-
 /**
  * NewStudentWindow Class
  * A Window which acts as the front-end for the user to the Controller object
  * Project 2: SIMS GUI Project
  * @author Daniel Dymond (Group 1 - ID# 17977610) 2020
  */
+package Views;
+
+import java.awt.event.ActionListener;
+
+
 public class NewStudentWindow extends javax.swing.JInternalFrame
 {
     ActionListener actionListener;
 
     /**
      * Creates new StudentDetailsWindow
+     * @param actionListener ActionListener from the Controller
      */
     public NewStudentWindow(ActionListener actionListener) {
         this.actionListener = actionListener;

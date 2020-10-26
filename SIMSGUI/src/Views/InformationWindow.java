@@ -1,20 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * InformationWindow Class
+ * A JInternalFrame used to show Information dialog when the application wants to communicate
+ * a statement with the user.
+ * Project 2: SIMS GUI Project
+ * @author Daniel Dymond (Group 1 - ID# 17977610) 2020
  */
 package Views;
 
-/**
- *
- * @author danie
- */
-public class InformationWindow extends javax.swing.JInternalFrame {
-
+public class InformationWindow extends javax.swing.JInternalFrame 
+{
     String message;
     
     /**
-     * Creates new form ExceptionWindow
+     * Creates new form InformationWindow
+     * @param message Message to show user
      */
     public InformationWindow(String message) {
         this.message = message;

@@ -1,20 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * ExceptionWindow Class
+ * A JInternalFrame used to show Exceptions when error occur within the application
+ * Project 2: SIMS GUI Project
+ * @author Daniel Dymond (Group 1 - ID# 17977610) 2020
  */
 package Views;
 
-/**
- *
- * @author danie
- */
 public class ExceptionWindow extends javax.swing.JInternalFrame {
 
     String message;
     
     /**
      * Creates new form ExceptionWindow
+     * @param message Message to show to user
      */
     public ExceptionWindow(String message) {
         this.message = message;
