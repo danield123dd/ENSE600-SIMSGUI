@@ -75,10 +75,8 @@ public class LoginController
         } 
         
         // If an exception is caught, show an error message
-        catch (SQLException sqle) {
+        catch (SQLException | IllegalArgumentException sqle) {
             new LoginExceptionWindow(sqle.getMessage()).setVisible(true);
-        } catch (IllegalArgumentException iie) {
-            new LoginExceptionWindow(iie.getMessage()).setVisible(true);
         }
     }
     
