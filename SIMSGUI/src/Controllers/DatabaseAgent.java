@@ -10,9 +10,7 @@ package Controllers;
 import Models.Address;
 import Models.Gender;
 import Models.Student;
-import Views.ExceptionWindow;
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -25,10 +23,9 @@ import java.util.Random;
 public class DatabaseAgent 
 {
     public Connection conn = null;
-    String url;
-    String username;
+    private String url;
+    private String username;
     Statement statement;
-    DatabaseMetaData dbmd;
     
     /**
      * Creates a new Database Agent, attempting to perform a Login to the Database Server
@@ -69,7 +66,6 @@ public class DatabaseAgent
         {
             conn = DriverManager.getConnection(url, username, password);
             statement = conn.createStatement();
-            dbmd = conn.getMetaData();
             
             // Once connected, keep URL and Username (these might be useful in 
             // the interface), but do not keep the Password (for security)
@@ -85,6 +81,7 @@ public class DatabaseAgent
      * Logs out of the database, and nullify any important connection information
      * before garbage collection for security.
      * @return true if successful
+     * @throws SQLException if an error occurs connecting to the Database
      */
     public boolean logout() throws SQLException
     {
@@ -98,7 +95,6 @@ public class DatabaseAgent
                 conn.close();
                 conn = null;
                 url = null;
-                dbmd = null;
                 
                 // Once cleared, confirmed success with the calling function.
                 return true;
@@ -168,28 +164,18 @@ public class DatabaseAgent
      */
     public Student getStudent(String studentID) throws SQLException
     {
-        ResultSet rS = null;
-        Student toReturn = null;
-        
         // Attempt to lookup the Student from the Database based on Student ID
-        try {
-            String query = "SELECT * FROM STUDENTS WHERE STUDENT_ID='" + studentID + "'";
-            rS = statement.executeQuery(query);
-            List<Student> results = generateStudentObjects(rS);
-            
-            // If a single student is found, the lookup is successful. Otheriwse, perform appropriate error measure
-            if (results.size() > 1)
-                throw new SQLException("Multiple Students with the same Student ID were found. Contact your system administrator to resolve this issue.");
-            if (results.size() < 1)
-                toReturn = null;
-            else
-                toReturn = results.get(0);
-        } catch (SQLException sqle) {
-            new ExceptionWindow(sqle.getMessage()).setVisible(true);
-        }
-        
-        // Return the Student Object
-        return toReturn;
+        String query = "SELECT * FROM STUDENTS WHERE STUDENT_ID='" + studentID + "'";
+        ResultSet rS = statement.executeQuery(query);
+        List<Student> results = generateStudentObjects(rS);
+
+        // If a single student is found, the lookup is successful. If none are found, return null. Otherwise, an error must of occured.
+        if (results.size() > 1)
+            throw new SQLException("Multiple Students with the same Student ID were found. Contact your system administrator to resolve this issue.");
+        if (results.size() < 1)
+            return null;
+        else
+            return results.get(0);
     }
     
     /**
@@ -201,25 +187,16 @@ public class DatabaseAgent
      */
     public List<Student> getStudent(String firstName, String lastName) throws SQLException
     {
-        List<Student> toReturn = null;
-        
         // Attempt to lookup the Student from the Database based on Student ID
-        try {
-            String query = "SELECT * FROM STUDENTS WHERE LOWER(FIRST_NAME) LIKE '%" + firstName.toLowerCase() + "%' AND LOWER(LAST_NAME) LIKE '%" + lastName.toLowerCase() + "%'";
-            ResultSet rS = statement.executeQuery(query);
-            List<Student> results = generateStudentObjects(rS);
-            
-            // If student(s) are found, the lookup is successful. Otheriwse, perform appropriate error measure
-            if (results.size() < 1)
-                toReturn = null;
-            else
-                toReturn = results;
-        } catch (SQLException sqle) {
-            new ExceptionWindow(sqle.getMessage()).setVisible(true);
-        }
-        
-        // Return the Student Objects
-        return toReturn; 
+        String query = "SELECT * FROM STUDENTS WHERE LOWER(FIRST_NAME) LIKE '%" + firstName.toLowerCase() + "%' AND LOWER(LAST_NAME) LIKE '%" + lastName.toLowerCase() + "%'";
+        ResultSet rS = statement.executeQuery(query);
+        List<Student> results = generateStudentObjects(rS);
+
+        // If student(s) are found, return a list of them. Otherwise, return null.
+        if (results.size() < 1)
+            return null;
+        else
+            return results;
     }
     
     /**
@@ -230,13 +207,12 @@ public class DatabaseAgent
      */
     public List generateStudentObjects(ResultSet rS) throws SQLException 
     {
-        List<Student> results = new LinkedList<>();
-        
         // If no results are found, return null
         if (rS == null)
             return null;
 
         // Otherwise, go through the results and create a Student Object
+        List<Student> results = new LinkedList<>();
         while (rS.next()) {
 
             // Otherwise, extract the details for the student
@@ -258,7 +234,6 @@ public class DatabaseAgent
         }
         
         return results;
-        
     }
     
     /**
